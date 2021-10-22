@@ -16,7 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/film', function () {
-    return view('film');
+Route::get('/movie', function () {
+    return view('movie');
+});
+
+Route::get('/login', function () {
+    return view('sessions/login');
 });
 
