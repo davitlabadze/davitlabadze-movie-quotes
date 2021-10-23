@@ -7,9 +7,10 @@
     <title>Document</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+   
     <style>
         body{
-            background: #3D3B3B;
+            background: radial-gradient(50% 50% at 50% 50%, #4E4E4E 0%, #3D3B3B 99.99%, #3D3B3B 100%) no-repeat;
         }
     </style>
    
