@@ -28,8 +28,21 @@ Route::get('/dashboard/posts', function () {
     return view('dashboard/posts');
 });
 
+Route::get('/dashboard/posts/post', function () {
+    return view('dashboard/form/post');
+});
+
 Route::get('/dashboard/categories', function () {
     return view('dashboard/categories');
 });
+
+
+Route::get('/dashboard/categories/category', function () {
+    return view('dashboard/form/category');
+});
+
+
+
+
 
 

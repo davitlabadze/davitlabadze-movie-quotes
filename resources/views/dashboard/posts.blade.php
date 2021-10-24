@@ -157,7 +157,7 @@
                 </div>
               </div>
               <div>
-                <button class="p-2 bg-green-500 rounded-lg hover:bg-green-600"><a href="">Add New Post</a></button>
+                <button class="p-2 bg-green-500 rounded-lg hover:bg-green-600"><a href="http://localhost:8000/dashboard/posts/post">Add New Post</a></button>
                </div>
         </div>
         
