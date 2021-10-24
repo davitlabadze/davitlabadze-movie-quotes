@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,15 +33,8 @@ Route::get('/dashboard/posts/post', function () {
     return view('dashboard/form/post');
 });
 
-Route::get('/dashboard/categories', function () {
-    return view('dashboard/categories');
-});
-
-
-Route::get('/dashboard/categories/category', function () {
-    return view('dashboard/form/category');
-});
-
+//categories
+Route::resource('/admin/category', CategoryController::class)->except('show');
 
 
 

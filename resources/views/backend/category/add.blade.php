@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+ 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
    
@@ -21,39 +22,34 @@
   
         <div class="px-12 py-12">
             <div class="absolute w-12 h-12 px-3 py-2 text-xl text-center text-white bg-transparent border-2 rounded-full cursor-pointer opacity-30 hover:opacity-100">
-                <a href="http://localhost:8000/dashboard/categories"><</a>
+                <a href="http://localhost:8000/admin/category"><</a>
             </div>
         </div>
-
+        
         <div class="flex justify-center py-36">
             <div class="ml-10">
                 <main class="container max-w-lg p-6 mx-auto bg-gray-400 border border-gray-200 rounded-xl">
-                    <h1 class="font-bold text-center front-bold-text-xl">Create New Post</h1>
-                    <form action="#" method="GET" class="mt-10">
+                    <h1 class="font-bold text-center front-bold-text-xl">Create New Category</h1>
+                    <form action="{{url('admin/category')}}" method="POST" class="mt-10" enctype="multipart/form-data">
                         @csrf
                     
                         <div class="mb-6">
                             <label class="block mb-2 text-xs font-bold text-gray-700 uppercase" for="text"> Category_en </label>
-                            <input class="w-full p-2 border border-gray-400" type="text" name="" id="" />
+                            <input class="w-full p-2 border border-gray-400" type="text" name="category_en" id=""/>
                     
-                            @error('text')
-                                <p class="mt-2 text-xs text-red-500"></p>
+                            @error('category_en')
+                                <p class="mt-2 text-xs text-red-500">{{ $message }}</p>
                             @enderror
                         </div>
                     
                         <div class="mb-6">
                             <label class="block mb-2 text-xs font-bold text-gray-700 uppercase" for="text"> Category_ka </label>
-                            <input class="w-full p-2 border border-gray-400" type="text" name="" id="" />
+                            <input class="w-full p-2 border border-gray-400" type="text" name="category_ka" id="" />
                     
-                            @error('text')
-                                <p class="mt-2 text-xs text-red-500"></p>
+                            @error('category_ka')
+                                <p class="mt-2 text-xs text-red-500">{{ $message }}</p>
                             @enderror
                         </div>
-                        
-                    
-                        
-                       
-                    
                         <div class="mb-6">
                             <button type="submit" class="w-full px-4 py-2 text-white bg-green-600 rounded-lg rounderd hover:bg-green-700">Create</button>
                         </div>
