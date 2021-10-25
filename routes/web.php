@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,13 +26,8 @@ Route::get('/login', function () {
     return view('sessions/login');
 });
 
-Route::get('/dashboard/posts', function () {
-    return view('dashboard/posts');
-});
-
-Route::get('/dashboard/posts/post', function () {
-    return view('dashboard/form/post');
-});
+//posts
+Route::resource('/admin/post', PostController::class)->except('show');
 
 //categories
 Route::resource('/admin/category', CategoryController::class)->except('show');

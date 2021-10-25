@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('backend.category.index',['categories'=>$categories]);
+        return view('backend.category.index', ['categories' => $categories]);
     }
 
     /**
@@ -36,7 +36,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-       
+
         $request->validate([
             'category_en' => 'required',
             'category_ka' => 'required',
@@ -47,7 +47,7 @@ class CategoryController extends Controller
             'category_ka' => $request->category_ka,
         ]);
 
-        return redirect()->route('category.index'); 
+        return redirect()->route('category.index');
     }
 
     /**
@@ -70,8 +70,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category_to_edit = Category::where('id', $id)->firstOrfail();
-        return view('backend.category.update',['category' => $category_to_edit]);
-       
+        return view('backend.category.update', ['category' => $category_to_edit]);
     }
 
     /**
@@ -84,16 +83,16 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'category_en'=>'required',
-            'category_ka'=>'required',
+            'category_en' => 'required',
+            'category_ka' => 'required',
         ]);
-        
-        Category::where('id', $id)->update([
-            'category_en'=> $request->category_en,
-            'category_ka'=> $request->category_ka,
-         ]);
 
-        return redirect('admin/category'); 
+        Category::where('id', $id)->update([
+            'category_en' => $request->category_en,
+            'category_ka' => $request->category_ka,
+        ]);
+
+        return redirect('admin/category');
     }
 
     /**
@@ -104,7 +103,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::where('id',$id)->delete();
+        Category::where('id', $id)->delete();
         return redirect('admin/category');
     }
 }
