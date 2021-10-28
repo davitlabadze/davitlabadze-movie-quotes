@@ -33,6 +33,10 @@ Route::resource('/admin/post', PostController::class)->except('show');
 Route::resource('/admin/category', CategoryController::class)->except('show');
 
 
+Route::get('admin/dashboard', function () {
+    return view('backend.dashboard');
+});
+
 
 
 

@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->foreignId('category_id');
             $table->string('quote_en');
             $table->string('quote_ka');
-            $table->string('thumbnail')->nullable();
+            $table->string('thumbnail');
             $table->timestamps();
         });
     }

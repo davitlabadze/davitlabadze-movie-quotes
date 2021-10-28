@@ -16,6 +16,7 @@ class PostController extends Controller
      */
     public function index()
     {
+
         $posts = Post::orderBy('id', 'DESC')->get();
         return view('backend.post.index', ['posts' => $posts]);
     }
@@ -28,7 +29,6 @@ class PostController extends Controller
     public function create()
     {
         $category = Category::all();
-
         return view('backend.post.add')->with('category', $category);
     }
 
