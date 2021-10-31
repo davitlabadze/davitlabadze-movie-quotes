@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
@@ -17,26 +18,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 Route::get('/movie', function () {
     return view('movie');
 });
 
-Route::get('/login', function () {
-    return view('sessions/login');
+Route::prefix('/admin')->group(function () {
+    Route::get('/login', [AdminController::class,'login'])->name('login');
+    Route::post('/login', [AdminController::class,'submit_login']);
+    Route::get('/logout', [AdminController::class,'destroy'])->name('logout');
+    Route::get('/dashboard', [AdminController::class,'dashboard'])->name('dashboard');
+    Route::resource('/post', PostController::class)->except('show')->names('post');
+    Route::resource('/category', CategoryController::class)->except('show')->names('category');
 });
-
-//posts
-Route::resource('/admin/post', PostController::class)->except('show');
-
-//categories
-Route::resource('/admin/category', CategoryController::class)->except('show');
-
-
-Route::get('admin/dashboard', function () {
-    return view('backend.dashboard');
-});
-
-
-
-

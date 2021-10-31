@@ -8,8 +8,7 @@
         </svg>
       </div>
       <div class="flex-1 min-w-0">
-        <a href="#" class="focus:outline-none">
-          <span class="absolute inset-0" aria-hidden="true"></span>
+        <a href="{{ route('category.index') }}" class="focus:outline-none">
           <p class="text-sm font-medium text-white">
             All Categories
           </p>
@@ -27,8 +26,7 @@
             </svg>
         </div>
         <div class="flex-1 min-w-0">
-          <a href="#" class="focus:outline-none">
-            <span class="absolute inset-0" aria-hidden="true"></span>
+          <a href="{{ route('post.index') }}" class="focus:outline-none">
             <p class="text-sm font-medium text-white">
               All Posts
             </p>
@@ -63,31 +61,31 @@
             <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                Image
             </th>
-
           </tr>
     </thead>
     <tbody>
         <tr class="bg-white">
-            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                1
-            </td>
-            <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                Father of a Soldier
-            </td>
-            <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                ჯარისკაცის მამა
-            </td>
-            <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                “What should I tell you your mother?!”
-            </td>
-            <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                “რა ვუთხრა დედაშენს?!”
-            </td>
-            <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-            <img src="" width="64" height="64" alt="image">
-            </td>
+            @foreach($posts as $post)
+                <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                    {{ $post->id }}
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                    {{ $post->category->category_en }}
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                    {{ $post->category->category_ka }}
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                    {{ $post->quote_en }}
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                    {{ $post->quote_ka }}
+                </td>
+                <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                <img src="{{ asset('storage/'. $post->thumbnail) }}" width="64" height="64" alt="image">
+                </td>
+            @endforeach
         </tr>
     </tbody>
 </div>
-
 @endsection
