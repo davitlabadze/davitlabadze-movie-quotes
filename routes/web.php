@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ShowCategoryPostsController;
+use App\Http\Controllers\ShowPostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,12 +18,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
-Route::get('/movie', function () {
-    return view('movie');
-});
+// Route::prefix('/')->group(function (){
+//     Route
+// });
+
+Route::get('/', [ShowPostController::class,'index'])->name('home');
+Route::get('/movie/{category:category_en}', [ShowCategoryPostsController::class,'index'])->name('movie');
 
 Route::prefix('/admin')->group(function () {
     Route::get('/login', [AdminController::class,'login'])->name('login');
