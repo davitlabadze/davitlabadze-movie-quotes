@@ -40,7 +40,7 @@ class AdminController extends Controller
     //dashboard
     public function dashboard()
     {
-        $posts = Post::orderBy('id', 'desc')->get();
+        $posts = Post::orderBy('id', 'desc')->paginate(5);
         return view('backend.dashboard', ['posts'=>$posts]);
     }
 

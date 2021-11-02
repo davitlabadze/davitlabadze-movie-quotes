@@ -10,6 +10,7 @@
           </svg> <a href="{{ route('category.create') }}">Create Data</a>
     </button>
 </div>
+<table class="min-w-full divide-y divide-gray-200">
 <thead class="bg-gray-50">
     <th scope="col" class="px-6 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
         Id
@@ -55,4 +56,8 @@
         </tr>
     @endforeach
 </tbody>
+</table>
+<div>
+    {{ $categories->links() }}
+</div>
 @endsection

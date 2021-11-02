@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('id', 'asc')->paginate(5);
         return view('backend.category.index', ['categories' => $categories]);
     }
 
@@ -36,7 +36,6 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'category_en' => 'required',
             'category_ka' => 'required',

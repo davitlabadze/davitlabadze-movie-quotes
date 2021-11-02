@@ -16,8 +16,7 @@ class PostController extends Controller
      */
     public function index()
     {
-
-        $posts = Post::orderBy('id', 'DESC')->get();
+        $posts = Post::orderBy('id', 'DESC')->paginate(5);
         return view('backend.post.index', ['posts' => $posts]);
     }
 
@@ -94,10 +93,9 @@ class PostController extends Controller
         if (isset($attributes['thumbnail'])) {
             $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
         }
-        Post::where('id',$id)->update($attributes);
+        Post::where('id', $id)->update($attributes);
 
         return redirect('admin/post');
-
     }
 
     /**

@@ -74,9 +74,9 @@
         </div>
       </div>
       <main class="w-full p-16 mx-auto mt-2 bg-gray-100 border border-gray-200 rounded-xl">
-        <table class="w-full">
+        <div class="w-full">
             @yield('content')
-        </table>
+        </div>
       </main>
     </div>
   </div>

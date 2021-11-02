@@ -38,19 +38,22 @@
         </div>
     </div>
 </div>
-<div class="flex py-3 mt-10 "><svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-6 h-6 mr-3 text-black "fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-</svg>Recent Posts
+<div class="flex py-3 mt-10 ">
+    <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-6 h-6 mr-3 text-black "fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+    </svg>Recent Posts
+</div>
+<table class="min-w-full divide-y divide-gray-200">
     <thead class="bg-gray-50">
         <tr>
             <th scope="col" class="px-2 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                 Id
             </th>
             <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-              Category_en
+            Category_en
             </th>
             <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-              Category_ka
+            Category_ka
             </th>
             <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                 Quotes_en
@@ -59,13 +62,13 @@
                 Quotes_ka
             </th>
             <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-               Image
+            Image
             </th>
-          </tr>
+        </tr>
     </thead>
     <tbody>
-        <tr class="bg-white">
-            @foreach($posts as $post)
+        @foreach($posts as $post)
+            <tr class="bg-white">
                 <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
                     {{ $post->id }}
                 </td>
@@ -84,8 +87,14 @@
                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                 <img src="{{ asset('storage/'. $post->thumbnail) }}" width="64" height="64" alt="image">
                 </td>
-            @endforeach
-        </tr>
+            </tr>
+        @endforeach
     </tbody>
+</table>
+<div>
+    {{ $posts->links() }}
 </div>
+
+
+
 @endsection
