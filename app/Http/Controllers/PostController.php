@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use App\Models\Category;
 use App\Models\Post;
-use Illuminate\Validation\Rule;
-use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -37,14 +36,9 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        $attributes = request()->validate([
-            'quote_en'    => 'required',
-            'quote_ka'    => 'required',
-            'thumbnail'   => 'required|image',
-            'category_id' => ['required', Rule::exists('categories', 'id')],
-        ]);
+        $attributes = $request->validated();
         $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
         Post::create($attributes);
         return redirect()->route('post.index');
@@ -81,15 +75,9 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(StorePostRequest $request, $id)
     {
-        $attributes = request()->validate([
-            'quote_en'    => 'required',
-            'quote_ka'    => 'required',
-            'thumbnail'   => 'image',
-            'category_id' => ['required', Rule::exists('categories', 'id')]
-        ]);
-
+        $attributes = $request->validated();
         if (isset($attributes['thumbnail'])) {
             $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
         }

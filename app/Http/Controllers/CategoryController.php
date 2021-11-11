@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -34,17 +35,10 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        $request->validate([
-            'category_en' => 'required',
-            'category_ka' => 'required',
-        ]);
-
-        Category::create([
-            'category_en' => $request->category_en,
-            'category_ka' => $request->category_ka,
-        ]);
+        $attributes = $request->validated();
+        Category::create($attributes);
 
         return redirect()->route('category.index');
     }
@@ -79,17 +73,10 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreCategoryRequest $request, $id)
     {
-        $request->validate([
-            'category_en' => 'required',
-            'category_ka' => 'required',
-        ]);
-
-        Category::where('id', $id)->update([
-            'category_en' => $request->category_en,
-            'category_ka' => $request->category_ka,
-        ]);
+        $attributes = $request->validated();
+        Category::where('id', $id)->update($attributes);
 
         return redirect('admin/category');
     }
