@@ -19,7 +19,7 @@
                 <a href="/"><</a>
             </div>
         </div>
-        <div class="flex justify-center py-36">
+        <div class="flex justify-center py-24">
             <main class="container max-w-lg p-16 mx-auto mt-10 bg-gray-300 border border-gray-200 rounded-xl">
                 <h1 class="text-center front-bold-text-xl">Log In</h1>
                 <form method="POST" class="mt-10">

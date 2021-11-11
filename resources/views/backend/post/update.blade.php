@@ -24,23 +24,26 @@
         @enderror
     </div>
     @endforeach
-    <div class="mb-6">
-        <select name="category_id">
+    <div class="mt-2 mb-6">
+        <label for="category_id">Movie </label>
+        <select name="category_id" id="category_id">
             @foreach ($category as $category)
-            <option value="{{ $category->id }}"> {{ $category->getTranslation('movie','en') }}</option>
-        @endforeach
+                <option value="{{ $category->id }}"
+                    {{ old('category_id', $post->category_id) == $category->id ? 'selected' : ''}}
+                    > {{ $category->getTranslation('movie','en') }}</option>
+            @endforeach
             </div>
         </select>
-        @error('category_id')
-            <p class="mt-2 text-xs text-red-500">{{ $message }}</p>
-        @enderror
     </div>
-    <div class="mb-6">
-        <label class="block mb-2 text-xs font-bold text-gray-700 uppercase" for="text">Image </label>
-        <input type="file" name="thumbnail" value="{{ $post->thumbnail }}" id="">
-        @error('thumbnail')
-            <p class="mt-2 text-xs text-red-500"></p>
-        @enderror
+    <div class="flex mb-6" >
+       <div class="p-2 border border-gray-500 rounded ">
+            <label class="block mb-2 text-xs font-bold text-gray-700 uppercase " for="thumbnail">Image</label>
+            <input type="file" name="thumbnail" value="{{ $post->thumbnail }}" id="thumbnail">
+            @error('thumbnail')
+                <p class="mt-2 text-xs text-red-500">{{ $message }}</p>
+            @enderror
+       </div>
+        <img src="{{ asset('storage/'. $post->thumbnail) }}"  width="64" height="64" class="ml-2" alt="image">
     </div>
     <div class="mb-6 w-min">
         <button type="submit" class="w-full px-4 py-2 text-white bg-green-600 rounded-lg rounderd hover:bg-green-700">Create</button>
