@@ -13,8 +13,8 @@
     </style>
 </head>
 <body>
-    <div class="min-h-screen">
-        <div class="absolute px-12 space-y-3 py-96">
+    <div class="min-h-screen ">
+        <div class="absolute px-12 space-y-3 py-80">
             <x-translatebutton/>
         </div>
        @yield('content')
