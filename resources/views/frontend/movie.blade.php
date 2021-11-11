@@ -8,16 +8,15 @@
         </div>
     </div>
     <div class="flex -mt-20 ml-96">
-        <h1 class="ml-40 text-5xl text-white">{{ $category->category_en }}</h1>
+        <h1 class="ml-40 text-5xl text-white">{{ $category->movie }}</h1>
     </div>
     @foreach($category->posts as $post)
-
         <div class="flex justify-center m-14">
             <div class="bg-white rounded-lg">
                 <div class=" h-96">
-                    <img class="object-cover w-full h-full rounded" src="{{ asset('storage/'. $post->thumbnail) }}" alt="" >
+                    <img class="object-cover w-full h-full rounded" src="{{ asset('storage/'. $post->thumbnail) }}" alt="img" >
                 </div>
-                <h1 class="py-16 text-5xl text-center text-black">{{ $post->quote_en }}</h1>
+                <h1 class="py-16 text-5xl text-center text-black">{{ $post->quote }}</h1>
             </div>
         </div>
     @endforeach

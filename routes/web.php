@@ -18,12 +18,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::prefix('/')->group(function (){
-//     Route
-// });
-
-Route::get('/', [ShowPostController::class,'index'])->name('home');
-Route::get('/movie/{category:category_en}', [ShowCategoryPostsController::class,'index'])->name('movie');
+$router->group(['middleware' => [
+    'setlocale',
+]], function () use ($router) {
+    $router->get('/', [ShowPostController::class,'index'])->name('home');
+    $router->get('/movie/{category:id}', [ShowCategoryPostsController::class,'index'])->name('movie');
+});
 
 Route::prefix('/admin')->group(function () {
     Route::get('/login', [AdminController::class,'login'])->name('login');

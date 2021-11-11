@@ -24,8 +24,8 @@ class StoreCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_en'  => 'required',
-            'category_ka'  => 'required',
+            'movie.en'  => 'required',
+            'movie.ka'  => 'required',
         ];
     }
 }

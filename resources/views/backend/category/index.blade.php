@@ -16,10 +16,10 @@
         Id
     </th>
     <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-        Category_en
+        Movie_en
     </th>
     <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-        Category_ka
+        Movie_ka
     </th>
     <th scope="col" colspan="2" class="px-2 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase ">
         <span class="">Action</span>
@@ -31,12 +31,11 @@
             <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
                 {{ $category->id }}
             </td>
-            <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                {{ $category->category_en }}
-            </td>
-            <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-            {{ $category->category_ka }}
-            </td>
+            @foreach (config('app.available_locales') as $locale)
+                <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                   {{ $category->getTranslation('movie',$locale) }}
+                </td>
+            @endforeach
             <td class="text-sm font-medium text-right whitespace-nowrap">
             <form action="{{ route('category.edit',['category'=>$category->id])}}">
                 <button class="text-indigo-600 hover:text-indigo-900"><svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-blue-500 hover:text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">

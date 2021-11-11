@@ -25,8 +25,8 @@ class StorePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'quote_en' => 'required',
-            'quote_ka' => 'required',
+            'quote.en' => 'required',
+            'quote.ka' => 'required',
             'thumbnail'   => 'required|image',
             'category_id' => ['required', Rule::exists('categories', 'id')],
         ];

@@ -14,24 +14,19 @@
 </div>
 <form action="{{route('post.index')}}" method="POST" class="mt-10" enctype="multipart/form-data">
     @csrf
+    @foreach (config('app.available_locales') as $locale)
     <div class="mb-6">
-        <label class="block mb-2 text-xs font-bold text-gray-700 uppercase" for="text"> QUOTES_EN </label>
-        <input class="w-full p-2 border border-gray-400" type="text" name="quote_en" id="" />
-        @error('quote_en')
+        <label class="block mb-2 text-xs font-bold text-gray-700 uppercase" for="quote_{{ $locale }}"> Quote ({{ strtoupper($locale) }}) </label>
+        <input class="w-full p-2 border border-gray-400" type="text" name="quote[{{ $locale }}]"  id="quote_{{ $locale }}" value="{{ old('quote.' . $locale) }}" />
+        @error('quote.' . $locale)
             <p class="mt-2 text-xs text-red-500">{{ $message }}</p>
         @enderror
     </div>
-    <div class="mb-6">
-        <label class="block mb-2 text-xs font-bold text-gray-700 uppercase" for="text"> QUOTES_KA </label>
-        <input class="w-full p-2 border border-gray-400" type="text" name="quote_ka" id="" />
-        @error('quote_ka')
-            <p class="mt-2 text-xs text-red-500">{{ $message }}</p>
-        @enderror
-    </div>
+    @endforeach
     <div class="mb-6">
         <select name="category_id">
             @foreach ($category as $category)
-                <option value="{{ $category->id }}">{{ $category->category_en }}</option>
+                <option value="{{ $category->id }}"> {{ $category->getTranslation('movie','en') }}</option>
             @endforeach
         </select>
     </div>

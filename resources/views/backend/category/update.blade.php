@@ -15,20 +15,15 @@
 <form action="{{url('admin/category/'.$category->id)}}" method="POST" class="mt-10" enctype="multipart/form-data">
     @csrf
     @method('PATCH')
+    @foreach (config('app.available_locales') as $locale)
     <div class="mb-6">
-        <label class="block mb-2 text-xs font-bold text-gray-700 uppercase" for="text"> Category_en </label>
-        <input class="w-full p-2 border border-gray-400" type="text" name="category_en" value="{{$category->category_en}}" id="" />
-        @error('category_en')
+        <label class="block mb-2 text-xs font-bold text-gray-700 uppercase" for="movie_{{ $locale }}"> Category ({{ strtoupper($locale) }}) </label>
+        <input class="w-full p-2 border border-gray-400" type="text" name="movie[{{ $locale }}]"  id="movie_{{ $locale }}" value=" {{ $category->getTranslation('movie',$locale) }}" />
+        @error('movie.' . $locale)
             <p class="mt-2 text-xs text-red-500">{{ $message }}</p>
         @enderror
     </div>
-    <div class="mb-6">
-        <label class="block mb-2 text-xs font-bold text-gray-700 uppercase" for="text"> Category_ka </label>
-        <input class="w-full p-2 border border-gray-400" type="text" name="category_ka"  value="{{$category->category_ka}}"id="" />
-        @error('category_ka')
-            <p class="mt-2 text-xs text-red-500">{{ $message }}</p>
-        @enderror
-    </div>
+    @endforeach
     <div class="mb-6 w-min">
         <button type="submit" class="w-full px-4 py-2 text-white bg-green-600 rounded-lg rounderd hover:bg-green-700">Update</button>
     </div>

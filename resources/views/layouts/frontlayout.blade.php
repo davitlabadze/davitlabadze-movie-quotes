@@ -15,12 +15,11 @@
 <body>
     <div class="min-h-screen">
         <div class="absolute px-12 space-y-3 py-96">
-            <div class="w-12 h-12 px-3 py-3 text-sm text-center text-white bg-transparent border-2 rounded-full cursor-pointer ">
-                <a href="">EN</a>
+            @foreach (config('app.available_locales') as $locale)
+            <div class="w-12 h-12 px-3 py-3 text-sm text-center text-black @if (app()->getLocale() != $locale) bg-gray-50 @endif bg-transparent  border-2 rounded-full cursor-pointer">
+                <a href="{{ request()->url() }}?language={{ $locale }} ">{{ strtoupper($locale) }}</a>
             </div>
-            <div class="w-12 h-12 px-3 py-3 text-sm text-center border-2 rounded-full cursor-pointer bg-gray-50">
-                <a href="">KA</a>
-            </div>
+            @endforeach
         </div>
        @yield('content')
     </div>
