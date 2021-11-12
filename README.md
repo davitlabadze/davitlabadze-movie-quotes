@@ -7,6 +7,7 @@
 *  [ Configuring SQLite in Laravel. ](#dbinstall)
 *  [ Administrator. ](#administrator)
 *  [ Database structure.](#db)
+*  [ Resources.](#resources)
 
 <a name="about"></a>
 
@@ -75,6 +76,7 @@ One of the drivers of Laravel Eloquent is SQLite, so running SQLite simply means
 ## Database structure
 !['db'](appscreen/db.png)
 
+<a name="resources"></a>
 ##  Resources
 * [Spatie Package](https://github.com/spatie/laravel-translatable)
 * [DrawSQL](https://drawsql.app/)   
