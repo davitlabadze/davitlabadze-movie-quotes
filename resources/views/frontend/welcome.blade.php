@@ -1,9 +1,9 @@
 @extends('layouts.frontlayout')
 @section('content')
 <div class="flex justify-center py-32">
-   @if(isset($data))
+    @if($data->isEmpty())
     <div class="flex h-96">
-        <h1 class="py-56 text-5xl text-center text-white">Posts not yet</h1>
+        <h1 class="py-64 text-5xl text-center text-white"> @if (app()->getLocale() == 'en') No posts have been added yet @else პოსტები ჯერ არ არის დამატებული @endif </h1>
     </div>
    @else
     @foreach($data as $post)
