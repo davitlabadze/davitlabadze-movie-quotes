@@ -13,7 +13,7 @@
 
 ## About the application
 
-Movie Quotes is a website where you can browse the website and view a random movie quote. Also go to the random movie page and see the famous quote from this movie. The website has a multilingual function, these are en and ka.
+Movie Quotes is a website where you can browse the website and view a random movie quote. Also go to the random movie page and see the famous quote from this movie. The website has a multilingual function, it is English and Georgian.
 
 ## App looks like 
 !['screenshot'](appscreen/screen1.png)
@@ -54,22 +54,23 @@ One of the drivers of Laravel Eloquent is SQLite, so running SQLite simply means
 
     !['dbconf'](appscreen/dbconf.png)
 2. We also need to create a blank file in the database folder named ```database.sqlite``` because Laravel searches for the SQLite file at this address by default:
-    > If you use Linux. Go to the directory database `cd database` and run: ```touch database.sqlite```
-    Note!: Do not forget to go back to the previous directory. The command `cd ../`
+    > If you use Linux. Go to the directory database: `cd database` and run: ```touch database.sqlite```.
+
+    > <img src="https://img.icons8.com/emoji/12/000000/warning-emoji.png"/> **_NOTE:_** Do not forget to go back to the previous directory. The command `cd ../`
    
    !['dbdir'](appscreen/dbdir.png)
 
 
 
-> If you want SQLite database (file) to another address, then in ```config/database.php``` we need to get the desired address and file name:
+3. If you want SQLite database (file) to another address, then in ```config/database.php``` we need to get the desired address and file name:
 
-!['dbchangdir'](appscreen/dbchangdir.png)
+    !['dbchangdir'](appscreen/dbchangdir.png)
 
 <a name="administrator"></a>
 
 ## Administrator
 
-> Run command ```php artisan add:admin``` and enter data.
+Run command ```php artisan add:admin``` and enter data. 
 
 <a name="db"></a>
 
@@ -77,6 +78,7 @@ One of the drivers of Laravel Eloquent is SQLite, so running SQLite simply means
 !['db'](appscreen/db.png)
 
 <a name="resources"></a>
+
 ##  Resources
 * [Spatie Package](https://github.com/spatie/laravel-translatable)
 * [DrawSQL](https://drawsql.app/)   
