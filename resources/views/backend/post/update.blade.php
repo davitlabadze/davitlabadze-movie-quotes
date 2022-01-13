@@ -46,7 +46,7 @@
         <img src="{{ asset('storage/'. $post->thumbnail) }}"  width="64" height="64" class="ml-2" alt="image">
     </div>
     <div class="mb-6 w-min">
-        <button type="submit" class="w-full px-4 py-2 text-white bg-green-600 rounded-lg rounderd hover:bg-green-700">Create</button>
+        <button type="submit" class="w-full px-4 py-2 text-white bg-green-600 rounded-lg rounderd hover:bg-green-700">Edit</button>
     </div>
 </form>
 @endsection
