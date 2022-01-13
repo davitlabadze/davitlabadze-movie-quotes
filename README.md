@@ -1,19 +1,13 @@
 
 ## Table of Contents
 
-[ About The App.](#about)
-
-[ Prerequisites. ](#pre)
-
-[ Install and Run.](#iar)
-
-[ Configuring SQLite in Laravel. ](#dbinstall)
-
-[ Administrator. ](#administrator)
-
-[ Database structure.](#db)
-
-[ Resources.](#resources)
+* [ About The App](#about)
+* [ Prerequisites ](#pre)
+* [ Install and Run](#iar)
+* [ Configuring SQLite in Laravel ](#dbinstall)
+* [ Administrator ](#administrator)
+* [ Database structure](#db)
+* [ Resources](#resources)
 
 <a name="about"></a>
 
