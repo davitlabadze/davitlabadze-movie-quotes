@@ -10,7 +10,7 @@
       <div class="flex-1 min-w-0">
         <a href="{{ route('category.index') }}" class="focus:outline-none">
           <p class="text-sm font-medium text-white">
-            All Categories
+            All Movies
           </p>
           <p class="text-sm text-white truncate">
               total:
@@ -28,7 +28,7 @@
         <div class="flex-1 min-w-0">
           <a href="{{ route('post.index') }}" class="focus:outline-none">
             <p class="text-sm font-medium text-white">
-              All Posts
+              All Quotes
             </p>
             <p class="text-sm text-white truncate">
                 total:

@@ -4,7 +4,7 @@
     <p class="flex p-2"><svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-6 h-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
     </svg>
-     Edit Category</p>
+     Edit Movie</p>
     <button class="flex p-2 text-white bg-gray-500 hover:bg-gray-600 rounded-xl">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -17,7 +17,7 @@
     @method('PATCH')
     @foreach (config('app.available_locales') as $locale)
     <div class="mb-6">
-        <label class="block mb-2 text-xs font-bold text-gray-700 uppercase" for="movie_{{ $locale }}"> Category ({{ strtoupper($locale) }}) </label>
+        <label class="block mb-2 text-xs font-bold text-gray-700 uppercase" for="movie_{{ $locale }}"> Movie ({{ strtoupper($locale) }}) </label>
         <input class="w-full p-2 border border-gray-400" type="text" name="movie[{{ $locale }}]"  id="movie_{{ $locale }}" value=" {{ $category->getTranslation('movie',$locale) }}" />
         @error('movie.' . $locale)
             <p class="mt-2 text-xs text-red-500">{{ $message }}</p>
