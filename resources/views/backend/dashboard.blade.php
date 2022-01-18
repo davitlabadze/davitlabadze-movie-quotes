@@ -3,9 +3,7 @@
 <div class="grid grid-cols-1 gap-4 sm:grid-cols-4">
     <div class="relative flex items-center px-6 py-5 space-x-3 bg-red-500 border rounded-lg shadow-sm hover:bg-red-600">
       <div class="flex-shrink-0">
-        <svg xmlns="http://www.w3.org/2000/svg"class="flex-shrink-0 w-6 h-6 mr-3 text-white"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-        </svg>
+        <img src="{{ asset('img/movies.svg') }}" class="flex-shrink-0 w-6 h-6 mr-3 text-white" alt="">
       </div>
       <div class="flex-1 min-w-0">
         <a href="{{ route('movies.index') }}" class="focus:outline-none">
@@ -21,9 +19,7 @@
     </div>
     <div class="relative flex items-center px-6 py-5 space-x-3 bg-blue-500 border rounded-lg shadow-sm hover:bg-blue-600">
         <div class="flex-shrink-0">
-            <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-6 h-6 mr-3 text-white "fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-            </svg>
+            <img src="{{ asset('img/quotes.svg') }}" class="flex-shrink-0 w-6 h-6 mr-3" alt="">
         </div>
         <div class="flex-1 min-w-0">
           <a href="{{ route('quotes.index') }}" class="focus:outline-none">
@@ -39,9 +35,8 @@
     </div>
 </div>
 <div class="flex py-3 mt-10 ">
-    <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-6 h-6 mr-3 text-black "fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-    </svg>Recent Movies quotes
+    <img src="{{ asset('img/recent.svg') }}" class="flex-shrink-0 w-6 h-6 mr-3" alt="">
+    Recent Movies quotes
 </div>
 <table class="min-w-full divide-y divide-gray-200">
     <thead class="bg-gray-50">
