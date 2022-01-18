@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAdminRequest;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class AdminController extends Controller
@@ -18,13 +20,9 @@ class AdminController extends Controller
     /**
      * submit login function
      */
-    public function submitLogin()
+    public function submitLogin(StoreAdminRequest $request)
     {
-        $attributes = request()->validate([
-            'email'    => 'required|email',
-            'password' => 'required'
-        ]);
-
+        $attributes = $request->validated();
         if (!auth()->attempt($attributes)) {
             throw ValidationException::withMessages([
                 'email' => 'This mail is not registered'
