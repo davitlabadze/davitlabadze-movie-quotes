@@ -30,6 +30,6 @@ Route::prefix('/admin')->group(function () {
     Route::post('/login', [AdminController::class,'submitLogin']);
     Route::get('/logout', [AdminController::class,'destroy'])->name('logout');
     Route::get('/dashboard', [AdminController::class,'dashboard'])->name('dashboard');
-    Route::resource('/quotes', PostController::class)->except('show')->names('quotes');
-    Route::resource('/movies', CategoryController::class)->except('show')->names('movies');
+    Route::resource('/quotes', PostController::class)->names('quotes');
+    Route::resource('/movies', CategoryController::class)->names('movies');
 });
