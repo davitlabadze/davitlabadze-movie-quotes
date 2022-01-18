@@ -27,7 +27,7 @@ $router->group(['middleware' => [
 
 Route::prefix('/admin')->group(function () {
     Route::get('/login', [AdminController::class,'login'])->name('login');
-    Route::post('/login', [AdminController::class,'submit_login']);
+    Route::post('/login', [AdminController::class,'submitLogin']);
     Route::get('/logout', [AdminController::class,'destroy'])->name('logout');
     Route::get('/dashboard', [AdminController::class,'dashboard'])->name('dashboard');
     Route::resource('/quotes', PostController::class)->except('show')->names('quotes');

@@ -19,7 +19,7 @@ class AdminController extends Controller
     /**
      * submit login function
      */
-    public function submit_login()
+    public function submitLogin()
     {
         $attributes = request()->validate([
             'email'    => 'required|email',
