@@ -16,7 +16,7 @@
     <div class="min-h-screen">
         <div class="px-12 py-12">
             <div class="absolute w-12 h-12 px-3 py-2 text-xl text-center text-white bg-transparent border-2 rounded-full cursor-pointer opacity-30 hover:opacity-100">
-                <a href="/"><</a>
+                <a href="{{ route('home') }}"><</a>
             </div>
         </div>
         <div class="flex justify-center py-24">

@@ -34,7 +34,7 @@ class AdminController extends Controller
 
         $adminData = auth()->attempt($attributes);
         session(['adminData'=>$adminData]);
-        return redirect('admin/dashboard');
+        return redirect()->route('dashboard');
     }
 
     //dashboard
@@ -49,6 +49,6 @@ class AdminController extends Controller
     {
         session()->forget(['adminData']);
         auth()->logout();
-        return redirect('/');
+        return redirect()->route('home');
     }
 }

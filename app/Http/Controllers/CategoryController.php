@@ -40,7 +40,7 @@ class CategoryController extends Controller
         $attributes = $request->validated();
         Category::create($attributes);
 
-        return redirect()->route('category.index');
+        return redirect()->route('movies.index');
     }
 
     /**
@@ -78,7 +78,7 @@ class CategoryController extends Controller
         $attributes = $request->validated();
         Category::where('id', $id)->update($attributes);
 
-        return redirect('admin/category');
+        return redirect()->route('movies.index');
     }
 
     /**
@@ -90,6 +90,6 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         Category::where('id', $id)->delete();
-        return redirect('admin/category');
+        return redirect()->route('movies.index');
     }
 }

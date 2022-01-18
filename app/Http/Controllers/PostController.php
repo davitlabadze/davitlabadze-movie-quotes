@@ -41,7 +41,7 @@ class PostController extends Controller
         $attributes = $request->validated();
         $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
         Post::create($attributes);
-        return redirect()->route('post.index');
+        return redirect()->route('quotes.index');
     }
 
     /**
@@ -83,7 +83,7 @@ class PostController extends Controller
         }
         Post::where('id', $id)->update($attributes);
 
-        return redirect('admin/post');
+        return redirect()->route('quotes.index');
     }
 
     /**
@@ -95,6 +95,6 @@ class PostController extends Controller
     public function destroy($id)
     {
         Post::where('id', $id)->delete();
-        return redirect('admin/post');
+        return redirect()->route('quotes.index');
     }
 }
