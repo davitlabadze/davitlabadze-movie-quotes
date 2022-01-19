@@ -8,34 +8,18 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $posts = Post::orderBy('id', 'DESC')->paginate(5);
         return view('backend.post.index', ['posts' => $posts]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $category = Category::all();
         return view('backend.post.add')->with('category', $category);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StorePostRequest $request)
     {
         $attributes = $request->validated();
@@ -44,12 +28,6 @@ class PostController extends Controller
         return redirect()->route('quotes.index');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $category = Category::all();
@@ -57,13 +35,6 @@ class PostController extends Controller
         return view('backend.post.update', ['category' => $category, 'post' => $post]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function update(StorePostRequest $request, $id)
     {
         $attributes = $request->validated();
@@ -75,12 +46,6 @@ class PostController extends Controller
         return redirect()->route('quotes.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         Post::where('id', $id)->delete();
