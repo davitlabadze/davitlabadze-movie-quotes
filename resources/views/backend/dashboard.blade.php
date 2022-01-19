@@ -11,8 +11,7 @@
             All Movies
           </p>
           <p class="text-sm text-white truncate">
-              total:
-            {{\App\Models\Category::count()}}
+              total:{{ $moviesCount }}
           </p>
         </a>
       </div>
@@ -27,8 +26,7 @@
               All Quotes
             </p>
             <p class="text-sm text-white truncate">
-                total:
-              {{\App\Models\Post::count()}}
+                total:{{$quotesCount}}
             </p>
           </a>
         </div>

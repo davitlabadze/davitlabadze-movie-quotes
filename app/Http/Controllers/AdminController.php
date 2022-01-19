@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAdminRequest;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Validation\ValidationException;
 
@@ -30,8 +31,10 @@ class AdminController extends Controller
 
     public function dashboard()
     {
+        $moviesCount = Category::count();
+        $quotesCount = Post::count();
         $posts = Post::orderBy('id', 'desc')->paginate(5);
-        return view('backend.dashboard', ['posts'=>$posts]);
+        return view('backend.dashboard', ['posts'=>$posts,'moviesCount' => $moviesCount,'quotesCount'=>$quotesCount]);
     }
 
     public function destroy()
