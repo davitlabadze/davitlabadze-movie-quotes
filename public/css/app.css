@@ -32716,6 +32716,16 @@ video {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.bgcolor {
+  background: radial-gradient(
+            50% 50% at 50% 50%,
+            #4e4e4e 0%,
+            #3d3b3b 99.99%,
+            #3d3b3b 100%
+        )
+        no-repeat;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
