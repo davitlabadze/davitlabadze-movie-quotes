@@ -13,10 +13,12 @@ $router->group(['middleware' => [
     $router->get('/', [ShowPostController::class,'index'])->name('home');
     $router->get('/movie/{category:id}', [ShowCategoryPostsController::class,'index'])->name('movie');
 });
-
-Route::prefix('/admin')->group(function () {
+Route::middleware('guest')->group(function () {
     Route::get('/login', [AdminController::class,'login'])->name('login');
     Route::post('/login', [AdminController::class,'submitLogin']);
+});
+
+Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/logout', [AdminController::class,'destroy'])->name('logout');
     Route::get('/dashboard', [AdminController::class,'dashboard'])->name('dashboard');
     Route::resource('/quotes', PostController::class)->names('quotes');

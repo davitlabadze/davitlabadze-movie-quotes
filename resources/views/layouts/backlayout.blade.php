@@ -6,11 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <title>Dashboard</title>
-    @if (!Session::has('adminData'))
-        <script>
-            window.location.href="{{ url('admin/login') }}"
-        </script>
-    @endif
 </head>
 <body>
     <div>
@@ -25,7 +20,6 @@
                         CORE
                     </div>
                     <a href="{{ route('dashboard') }}" class="flex items-center px-2 py-2 text-sm font-medium text-white bg-gray-900 rounded-md group">
-
                         <img src="{{ asset('img/home.svg') }}" class="flex-shrink-0 w-6 h-6 mr-3" alt="home">
                     Dashboard
                     </a>
@@ -42,7 +36,6 @@
                     </a>
                     <a href="{{ route('quotes.index') }}" class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
                         <img src="{{ asset('img/quotes.svg') }}" class="flex-shrink-0 w-6 h-6 mr-3" alt="quotes">
-
                     Quotes
                     </a>
                 </nav>
@@ -74,6 +67,7 @@
   </div>
 </body>
 </html>
+
 
 
 
