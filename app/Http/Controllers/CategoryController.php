@@ -28,8 +28,8 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
-        $category_to_edit = Category::where('id', $id)->firstOrfail();
-        return view('backend.category.update', ['category' => $category_to_edit]);
+        $categoryToEdit = Category::where('id', $id)->firstOrfail();
+        return view('backend.category.update', ['category' => $categoryToEdit]);
     }
 
     public function update(StoreCategoryRequest $request, $id)
