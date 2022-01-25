@@ -1,4 +1,6 @@
 @extends('layouts.backlayout')
+@section('title','Dashboard')
+
 @section('content')
 <div class="grid grid-cols-1 gap-4 sm:grid-cols-4">
     <div class="relative flex items-center px-6 py-5 space-x-3 bg-red-500 border rounded-lg shadow-sm hover:bg-red-600">

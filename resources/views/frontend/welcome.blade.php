@@ -1,4 +1,6 @@
 @extends('layouts.frontlayout')
+@section('title','Movie')
+
 @section('content')
 <div class="flex justify-center py-32">
     @if(!$data)

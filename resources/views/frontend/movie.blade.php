@@ -1,4 +1,6 @@
 @extends('layouts.frontlayout')
+@section('title','Movie Quotes')
+
 @section('content')
 
 <div class="justify-center py-36">

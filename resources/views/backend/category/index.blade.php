@@ -1,4 +1,6 @@
 @extends('layouts.backlayout')
+@section('title','Movies')
+
 @section('content')
 <div class="flex p-2 mb-10 -mt-12">
     <p class="flex p-2">
