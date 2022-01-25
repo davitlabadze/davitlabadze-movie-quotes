@@ -16,6 +16,7 @@ class AdminController extends Controller
     public function submitLogin(StoreAdminRequest $request)
     {
         $attributes = $request->validated();
+        auth()->attempt($attributes);
         return redirect()->route('dashboard');
     }
 
