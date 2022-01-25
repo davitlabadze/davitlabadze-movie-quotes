@@ -1,22 +1,20 @@
 @extends('layouts.frontlayout')
 @section('content')
 <div class="flex justify-center py-32">
-    @if($data->isEmpty())
+    @if(!$data)
     <div class="flex h-96">
         <h1 class="py-64 text-5xl text-center text-white"> @if (app()->getLocale() == 'en') No posts have been added yet @else პოსტები ჯერ არ არის დამატებული @endif </h1>
     </div>
    @else
-    @foreach($data as $post)
-            <div>
-                <div class="flex h-96">
-                    <img class="object-cover w-full h-full rounded-lg" src="{{ asset('storage/'. $post->thumbnail) }}" alt="image" >
-                </div>
-                <h1 class="py-12 text-5xl text-center text-white">{{ $post->quote }}</h1>
-                <div class="py-2 text-center text-white">
-                    <a class="font-sans text-5xl underline" href="{{ route('movie',['category' => $post->category->id]) }}">{{ $post->category->movie }}</a>
-                </div>
-            </div>
-        @endforeach
+   <div>
+    <div class="flex h-96">
+        <img class="object-cover w-full h-full rounded-lg" src="{{ asset('storage/'. $data->thumbnail) }}" alt="image" >
+    </div>
+    <h1 class="py-12 text-5xl text-center text-white">{{ $data->quote }}</h1>
+    <div class="py-2 text-center text-white">
+        <a class="font-sans text-5xl underline" href="{{ route('movie',['category' => $data->category->id]) }}">{{ $data->category->movie }}</a>
+    </div>
+</div>
    @endif
 </div>
 @guest
