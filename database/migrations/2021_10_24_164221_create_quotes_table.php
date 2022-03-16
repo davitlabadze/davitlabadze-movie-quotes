@@ -13,7 +13,7 @@ class CreateQuotesTable extends Migration
      */
     public function up()
     {
-        Schema::create('Quotes', function (Blueprint $table) {
+        Schema::create('quotes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('movie_id');
             $table->json('quote');
@@ -29,6 +29,6 @@ class CreateQuotesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Quotes');
+        Schema::dropIfExists('quotes');
     }
 }
