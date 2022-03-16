@@ -62,30 +62,30 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($posts as $post)
+        @foreach($quotes as $quote)
             <tr class="bg-white">
                 <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    {{ $post->id }}
+                    {{ $quote->id }}
                 </td>
                 @foreach (config('app.available_locales') as $locale)
                 <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                    {{ $post->category->getTranslation('movie',$locale) }}
+                    {{ $quote->movie->getTranslation('movie',$locale) }}
                 </td>
                 @endforeach
                 @foreach (config('app.available_locales') as $locale)
                 <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                    {{ $post->getTranslation('quote',$locale) }}
+                    {{ $quote->getTranslation('quote',$locale) }}
                 </td>
                 @endforeach
                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                <img src="{{ asset('storage/'. $post->thumbnail) }}" width="64" height="64" alt="image">
+                <img src="{{ asset('storage/'. $quote->thumbnail) }}" width="64" height="64" alt="image">
                 </td>
             </tr>
         @endforeach
     </tbody>
 </table>
 <div>
-    {{ $posts->links() }}
+    {{ $quotes->links() }}
 </div>
 
 

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Quote;
 
-class ShowPostController extends Controller
+class ShowQuoteController extends Controller
 {
     public function index()
     {
-        $data = Post::inRandomOrder()->first();
+        $data = Quote::inRandomOrder()->first();
         return view('frontend.welcome', ['data' => $data]);
     }
 }

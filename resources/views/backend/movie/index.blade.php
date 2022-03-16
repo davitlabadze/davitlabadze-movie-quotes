@@ -27,25 +27,25 @@
     </th>
 </thead>
 <tbody>
-    @foreach($categories as $category)
+    @foreach($movies as $movie)
         <tr class="bg-white">
             <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                {{ $category->id }}
+                {{ $movie->id }}
             </td>
             @foreach (config('app.available_locales') as $locale)
                 <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                   {{ $category->getTranslation('movie',$locale) }}
+                   {{ $movie->getTranslation('movie',$locale) }}
                 </td>
             @endforeach
             <td class="text-sm font-medium text-right whitespace-nowrap">
-            <form action="{{ route('movies.edit',['movie'=>$category->id])}}">
+            <form action="{{ route('movies.edit',['movie'=>$movie->id])}}">
                 <button>
                     <img src="{{ asset('img/pen.svg') }}" class="w-6 h-6" alt="edit-pen">
                 </button>
             </form>
             </td>
             <td class="text-sm font-medium text-center whitespace-nowrap">
-            <form  action="{{ route('movies.destroy', ['movie' => $category->id]) }}" method="POST">
+            <form  action="{{ route('movies.destroy', ['movie' => $movie->id]) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button>
@@ -58,6 +58,6 @@
 </tbody>
 </table>
 <div>
-    {{ $categories->links() }}
+    {{ $movies->links() }}
 </div>
 @endsection

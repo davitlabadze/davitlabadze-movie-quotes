@@ -6,14 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
-class Category extends Model
+class Quote extends Model
 {
     use HasFactory,HasTranslations;
     public $guarded = [];
 
-    public function posts()
+
+    public function movie()
     {
-        return $this->hasMany(Post::class);
+        return $this->belongsTo(Movie::class);
     }
-    public $translatable = ['movie'];
+
+    public $translatable = ['quote'];
 }

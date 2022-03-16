@@ -9,13 +9,13 @@
         <a href="{{ route('movies.index') }}">All Data</a>
     </button>
 </div>
-<form action="{{ route('movies.update',['movie' => $category->id])}}" method="POST" class="mt-10" enctype="multipart/form-data">
+<form action="{{ route('movies.update',['movie' => $movie->id])}}" method="POST" class="mt-10" enctype="multipart/form-data">
     @csrf
     @method('PATCH')
     @foreach (config('app.available_locales') as $locale)
     <div class="mb-6">
         <label class="block mb-2 text-xs font-bold text-gray-700 uppercase" for="movie_{{ $locale }}"> Movie ({{ strtoupper($locale) }}) </label>
-        <input class="w-full p-2 border border-gray-400" type="text" name="movie[{{ $locale }}]"  id="movie_{{ $locale }}" value=" {{ $category->getTranslation('movie',$locale) }}" />
+        <input class="w-full p-2 border border-gray-400" type="text" name="movie[{{ $locale }}]"  id="movie_{{ $locale }}" value=" {{ $movie->getTranslation('movie',$locale) }}" />
         @error('movie.' . $locale)
             <p class="mt-2 text-xs text-red-500">{{ $message }}</p>
         @enderror

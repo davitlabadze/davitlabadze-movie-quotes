@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StorePostRequest extends FormRequest
+class StoreQuoteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,7 +28,7 @@ class StorePostRequest extends FormRequest
             'quote.en' => 'required',
             'quote.ka' => 'required',
             'thumbnail'   => 'required|image',
-            'category_id' => ['required', Rule::exists('categories', 'id')],
+            'movie_id' => ['required', Rule::exists('movies', 'id')],
         ];
     }
 }

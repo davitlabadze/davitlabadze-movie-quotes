@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAdminRequest;
-use App\Models\Category;
-use App\Models\Post;
+use App\Models\Movie;
+use App\Models\Quote;
 
 class AdminController extends Controller
 {
@@ -22,10 +22,10 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        $moviesCount = Category::count();
-        $quotesCount = Post::count();
-        $posts = Post::orderBy('id', 'desc')->paginate(5);
-        return view('backend.dashboard', ['posts'=>$posts,'moviesCount' => $moviesCount,'quotesCount'=>$quotesCount]);
+        $moviesCount = Movie::count();
+        $quotesCount = Quote::count();
+        $quotes = Quote::orderBy('id', 'desc')->paginate(5);
+        return view('backend.dashboard', ['quotes'=>$quotes,'moviesCount' => $moviesCount,'quotesCount'=>$quotesCount]);
     }
 
     public function destroy()

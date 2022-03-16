@@ -38,33 +38,33 @@
       </tr>
     </thead>
     <tbody>
-      @foreach($posts as $post)
+      @foreach($quotes as $quote)
         <tr class="bg-white">
             <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                {{ $post->id }}
+                {{ $quote->id }}
             </td>
             @foreach (config('app.available_locales') as $locale)
             <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                {{ $post->category->getTranslation('movie',$locale) }}
+                {{ $quote->movie->getTranslation('movie',$locale) }}
             </td>
             @endforeach
             @foreach (config('app.available_locales') as $locale)
             <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                {{ $post->getTranslation('quote',$locale) }}
+                {{ $quote->getTranslation('quote',$locale) }}
             </td>
             @endforeach
             <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                <img src="{{ asset('storage/'. $post->thumbnail) }}" width="64" height="64" alt="">
+                <img src="{{ asset('storage/'. $quote->thumbnail) }}" width="64" height="64" alt="">
             </td>
             <td class="text-sm font-medium text-right whitespace-nowrap">
-                <form action="{{ route('quotes.edit',['quote'=>$post->id])}}">
+                <form action="{{ route('quotes.edit',['quote'=>$quote->id])}}">
                     <button>
                         <img src="{{ asset('img/pen.svg') }}" class="w-6 h-6" alt="edit-pen">
                     </button>
                 </form>
             </td>
             <td class="text-sm font-medium text-center whitespace-nowrap">
-                <form  action="{{ route('quotes.destroy', ['quote' => $post->id]) }}" method="POST">
+                <form  action="{{ route('quotes.destroy', ['quote' => $quote->id]) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button>
@@ -77,6 +77,6 @@
     </tbody>
 </table>
 <div>
-    {{ $posts->links() }}
+    {{ $quotes->links() }}
 </div>
 @endsection

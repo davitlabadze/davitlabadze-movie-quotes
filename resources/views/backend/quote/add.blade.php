@@ -21,9 +21,9 @@
     </div>
     @endforeach
     <div class="mb-6">
-        <select name="category_id">
-            @foreach ($category as $category)
-                <option value="{{ $category->id }}"> {{ $category->getTranslation('movie','en') }}</option>
+        <select name="movie_id">
+            @foreach ($movie as $movie)
+                <option value="{{ $movie->id }}"> {{ $movie->getTranslation('movie','en') }}</option>
             @endforeach
         </select>
     </div>

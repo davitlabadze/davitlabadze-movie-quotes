@@ -14,7 +14,7 @@
     </div>
     <h1 class="py-12 text-5xl text-center text-white">{{ $data->quote }}</h1>
     <div class="py-2 text-center text-white">
-        <a class="font-sans text-5xl underline" href="{{ route('movie',['category' => $data->category->id]) }}">{{ $data->category->movie }}</a>
+        <a class="font-sans text-5xl underline" href="{{ route('movie',['movie' => $data->movie->id]) }}">{{ $data->movie->movie }}</a>
     </div>
 </div>
    @endif
