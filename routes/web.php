@@ -7,12 +7,12 @@ use App\Http\Controllers\ShowMovieQuotesController;
 use App\Http\Controllers\ShowQuoteController;
 use Illuminate\Support\Facades\Route;
 
-$router->group(['middleware' => [
-    'setlocale',
-]], function () use ($router) {
-    $router->get('/', [ShowQuoteController::class,'index'])->name('home');
-    $router->get('/movie/{movie:id}', [ShowMovieQuotesController::class,'index'])->name('movie');
-});
+// $router->group(['middleware' => [
+//     'setlocale',
+// ]], function () use ($router) {
+//     $router->get('/', [ShowQuoteController::class,'index'])->name('home');
+//     $router->get('/movie/{movie:id}', [ShowMovieQuotesController::class,'index'])->name('movie');
+// });
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AdminController::class,'login'])->name('login');
     Route::post('/login', [AdminController::class,'submitLogin']);

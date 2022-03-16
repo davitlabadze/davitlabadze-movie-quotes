@@ -8,6 +8,7 @@ class ShowMovieQuotesController extends Controller
 {
     public function index(Movie $movie)
     {
-        return view('frontend.movie', ['movie' => $movie]);
+        $data = $movie->with('quotes')->find($movie->id);
+        return response()->json($data);
     }
 }

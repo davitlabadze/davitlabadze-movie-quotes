@@ -8,7 +8,8 @@ class ShowQuoteController extends Controller
 {
     public function index()
     {
-        $data = Quote::inRandomOrder()->first();
-        return view('frontend.welcome', ['data' => $data]);
+        $data = Quote::inRandomOrder()->with('movie')->first();
+        return response()->json($data);
+
     }
 }
