@@ -4,45 +4,48 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMovieRequest;
 use App\Models\Movie;
+use Illuminate\Http\Request;
+
 
 class MovieController extends Controller
 {
     public function index()
     {
         $movies = Movie::orderBy('id', 'asc')->paginate(5);
-        return view('backend.movie.index', ['movies' => $movies]);
+        return response()->json($movies);
     }
 
-    public function create()
-    {
-        return view('backend.movie.add');
-    }
+    public function store(Request $request){
+        $request->validate([
+            'movie-en'  => 'required',
+            'movie-ka'  => 'required',
+          ]);
 
-    public function store(StoreMovieRequest $request)
-    {
-        $attributes = $request->validated();
-        Movie::create($attributes);
+        $newMovie = new Movie;
+        $newMovie->movie = ['en' => $request->input('movie-en')];
+        $newMovie->movie = ['ka' => $request->input('movie-ka')];
 
-        return redirect()->route('movies.index');
+        $newMovie->save();
+        return response()->json($newMovie);
     }
 
     public function edit($id)
     {
         $movieToEdit = Movie::where('id', $id)->firstOrfail();
-        return view('backend.movie.update', ['movie' => $movieToEdit]);
+        return response()->json($movieToEdit);
     }
 
     public function update(StoreMovieRequest $request, $id)
     {
         $attributes = $request->validated();
-        Movie::where('id', $id)->update($attributes);
+        $movie = Movie::where('id', $id)->update($attributes);
 
-        return redirect()->route('movies.index');
+        return response()->json($movie);
     }
 
     public function destroy($id)
     {
         Movie::where('id', $id)->delete();
-        return redirect()->route('movies.index');
+        return response()->json(Movie::all());
     }
 }

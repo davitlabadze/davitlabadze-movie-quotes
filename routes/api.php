@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MovieController;
+use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\ShowMovieQuotesController;
 use App\Http\Controllers\ShowQuoteController;
 use Illuminate\Http\Request;
@@ -22,3 +25,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/get-quote',[ShowQuoteController::class,'index']);
 Route::get('/get-quotes/{movie:id}',[ShowMovieQuotesController::class,'index']);
+
+Route::get('/movies', [MovieController::class,'index']);
+Route::post('/movies/create', [MovieController::class,'store']);
