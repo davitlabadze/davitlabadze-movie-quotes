@@ -28,3 +28,6 @@ Route::get('/get-quotes/{movie:id}',[ShowMovieQuotesController::class,'index']);
 
 Route::get('/movies', [MovieController::class,'index']);
 Route::post('/movies/create', [MovieController::class,'store']);
+Route::get('/movies/{movie:id}/edit', [MovieController::class,'edit']);
+Route::put('/movies/{movie:id}/edit', [MovieController::class,'update']);
+Route::delete('/movies/{movie:id}', [MovieController::class,'destroy']);
