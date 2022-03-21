@@ -31,3 +31,6 @@ Route::post('/movies/create', [MovieController::class,'store']);
 Route::get('/movies/{movie:id}/edit', [MovieController::class,'edit']);
 Route::put('/movies/{movie:id}/edit', [MovieController::class,'update']);
 Route::delete('/movies/{movie:id}', [MovieController::class,'destroy']);
+
+
+Route::get('/quotes', [QuoteController::class,'index']);

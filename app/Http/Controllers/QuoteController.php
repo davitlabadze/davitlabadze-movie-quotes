@@ -11,7 +11,7 @@ class QuoteController extends Controller
     public function index()
     {
         $quotes = Quote::orderBy('id', 'DESC')->paginate(5);
-        return view('backend.quote.index', ['quotes' => $quotes]);
+        return response()->json($quotes);
     }
 
     public function create()
