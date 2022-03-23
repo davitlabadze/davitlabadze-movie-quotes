@@ -5,27 +5,41 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreQuoteRequest;
 use App\Models\Movie;
 use App\Models\Quote;
+use Illuminate\Validation\Rule;
+use Illuminate\Http\Request;
+
 
 class QuoteController extends Controller
 {
     public function index()
     {
-        $quotes = Quote::orderBy('id', 'DESC')->paginate(5);
+        $quotes = Quote::orderBy('id', 'DESC')->with('movie')->paginate(5);
         return response()->json($quotes);
     }
 
     public function create()
     {
-        $movie = Movie::all();
-        return view('backend.quote.add')->with('movie', $movie);
+        $movies = Movie::all();
+        return response()->json($movies);
+
     }
 
-    public function store(StoreQuoteRequest $request)
+    public function store(Request $request)
     {
-        $attributes = $request->validated();
-        $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
-        Quote::create($attributes);
-        return redirect()->route('quotes.index');
+
+        $request->validate([
+            'quote-en'  => 'required',
+            'quote-ka'  => 'required',
+            'thumbnail' => 'required|image',
+            'movie-id' => ['required', Rule::exists('movies', 'id')],
+          ]);
+        $newQuote = new Quote;
+        $newQuote->movie_id  = $request->input('movie-id');
+        $newQuote->quote     = ['en' => $request->input('quote-en')];
+        $newQuote->quote     = ['ka' => $request->input('quote-ka')];
+        $newQuote->thumbnail = $request->file('thumbnail')->store('thumbnails');
+        $newQuote->save();
+        return response()->json($newQuote);
     }
 
     public function edit($id)
