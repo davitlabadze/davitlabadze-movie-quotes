@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreQuoteRequest;
 use App\Models\Movie;
 use App\Models\Quote;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
-
 
 class QuoteController extends Controller
 {
@@ -44,25 +42,33 @@ class QuoteController extends Controller
 
     public function edit($id)
     {
-        $movie = Movie::all();
-        $quote = Quote::find($id);
-        return view('backend.quote.update', ['movie' => $movie, 'quote' => $quote]);
+        $movies = Movie::all();
+        $quote = Quote::findOrfail($id);
+        return response()->json(['movies'=>$movies,'quote'=>$quote]);
     }
 
-    public function update(StoreQuoteRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $attributes = $request->validated();
-        if (isset($attributes['thumbnail'])) {
-            $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
-        }
-        Quote::where('id', $id)->update($attributes);
-
-        return redirect()->route('quotes.index');
+        $request->validate([
+            'quote-en'  => 'required',
+            'quote-ka'  => 'required',
+            'thumbnail' => 'required|image',
+            'movie-id' => ['required', Rule::exists('movies', 'id')],
+        ]);
+        $updateQuote = Quote::findOrFail($id);
+        $updateQuote->movie_id  = $request->input('movie-id');
+        $updateQuote->quote     = [
+            'en' => $request->input('quote-en'),
+            'ka' => $request->input('quote-ka')
+        ];
+        $updateQuote->thumbnail = $request->file('thumbnail')->store('thumbnails');
+        $updateQuote->save();
+        return response()->json($updateQuote);
     }
 
     public function destroy($id)
     {
         Quote::where('id', $id)->delete();
-        return redirect()->route('quotes.index');
+        return response()->json(Quote::all());
     }
 }
