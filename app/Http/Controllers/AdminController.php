@@ -6,8 +6,6 @@ use App\Http\Requests\StoreAdminRequest;
 use App\Models\Movie;
 use App\Models\Quote;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
