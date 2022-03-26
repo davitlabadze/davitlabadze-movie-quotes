@@ -33,8 +33,8 @@ class AdminController extends Controller
     {
         $moviesCount = Movie::count();
         $quotesCount = Quote::count();
-        $quotes = Quote::orderBy('id', 'desc')->paginate(5);
-        return view('backend.dashboard', ['quotes'=>$quotes,'moviesCount' => $moviesCount,'quotesCount'=>$quotesCount]);
+        $quotes = Quote::orderBy('id', 'desc')->with('movie')->paginate(5);
+        return response()->json(['quotes'=>$quotes,'moviesCount' => $moviesCount,'quotesCount'=>$quotesCount]);
     }
 
     public function logout(Request $request)

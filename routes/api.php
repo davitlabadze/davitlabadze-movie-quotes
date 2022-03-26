@@ -21,28 +21,20 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('/login', [AdminController::class,'login']);
-
-
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-
-// });
-
 Route::get('/get-quote',[ShowQuoteController::class,'index']);
 Route::get('/get-quotes/{movie:id}',[ShowMovieQuotesController::class,'index']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-
-
     Route::post('/logout', [AdminController::class,'logout']);
 
+    Route::get('/dashboard', [AdminController::class,'dashboard']);
 
     Route::get('/movies', [MovieController::class,'index']);
     Route::post('/movies/create', [MovieController::class,'store']);
     Route::get('/movies/{movie:id}/edit', [MovieController::class,'edit']);
     Route::put('/movies/{movie:id}/edit', [MovieController::class,'update']);
     Route::delete('/movies/{movie:id}', [MovieController::class,'destroy']);
-
 
     Route::get('/quotes', [QuoteController::class,'index']);
     Route::get('/quotes/create', [QuoteController::class,'create']);
