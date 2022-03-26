@@ -19,15 +19,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+Route::post('/login', [AdminController::class,'login']);
+
+
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+
+// });
 
 Route::get('/get-quote',[ShowQuoteController::class,'index']);
 Route::get('/get-quotes/{movie:id}',[ShowMovieQuotesController::class,'index']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
+
+
+    Route::post('/logout', [AdminController::class,'logout']);
+
+
     Route::get('/movies', [MovieController::class,'index']);
     Route::post('/movies/create', [MovieController::class,'store']);
     Route::get('/movies/{movie:id}/edit', [MovieController::class,'edit']);
@@ -49,5 +58,4 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
 
-Route::post('/login', [AdminController::class,'login']);
 

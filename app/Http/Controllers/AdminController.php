@@ -6,6 +6,7 @@ use App\Http\Requests\StoreAdminRequest;
 use App\Models\Movie;
 use App\Models\Quote;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -36,9 +37,12 @@ class AdminController extends Controller
         return view('backend.dashboard', ['quotes'=>$quotes,'moviesCount' => $moviesCount,'quotesCount'=>$quotesCount]);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        auth()->logout();
-        return redirect()->route('home');
+        $request->user()->currentAccessToken()->delete();
+        return response()->json([
+            'status' => 200,
+            'message' => 'Logged In Successfully',
+        ]);
     }
 }
