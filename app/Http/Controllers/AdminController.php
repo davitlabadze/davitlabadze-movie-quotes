@@ -11,19 +11,16 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-    function login(StoreAdminRequest $request)
+    public function login(StoreAdminRequest $request)
     {
         $request->validated();
         $email =  $request->get('email');
         $password = $request->get('password');
 
-        $user = User::where('email',$email)->first();
-        if(!Hash::check($password, $user->password))
-        {
+        $user = User::where('email', $email)->first();
+        if (!Hash::check($password, $user->password)) {
             return response()->json(["message"=>"error"]);
-        }
-        else
-        {
+        } else {
             $token =$user->createToken('token');
             return ['token' => $token->plainTextToken];
         }
@@ -33,7 +30,7 @@ class AdminController extends Controller
     {
         $moviesCount = Movie::count();
         $quotesCount = Quote::count();
-        $quotes = Quote::orderBy('id', 'desc')->with('movie')->paginate(5);
+        $quotes = Quote::orderBy('id', 'desc')->with('movie')->get();
         return response()->json(['quotes'=>$quotes,'moviesCount' => $moviesCount,'quotesCount'=>$quotesCount]);
     }
 

@@ -9,11 +9,12 @@ class MovieController extends Controller
 {
     public function index()
     {
-        $movies = Movie::orderBy('id', 'asc')->paginate(5);
+        $movies = Movie::orderBy('id', 'asc')->get();
         return response()->json($movies);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
             'movie-en'  => 'required',
             'movie-ka'  => 'required',
@@ -35,19 +36,22 @@ class MovieController extends Controller
 
     public function update(Request $request, $id)
     {
-         $request->validate([
+        $request->validate([
             'movie-en'  => 'required',
             'movie-ka'  => 'required',
           ]);
 
-        $updateMovie = Movie::findOrFail($id);
-        $updateMovie->movie = [
-            'en' => $request->input('movie-en'),
-            'ka' => $request->input('movie-ka')
-        ];
-        $updateMovie->save();
-        return response()->json($updateMovie);
+        $movie = Movie::findOrFail($id);
+        $attributes = [
+                'movie' => [
+                    'en' => $request->input('movie-en'),
+                    'ka' => $request->input('movie-ka'),
+                ],
+            ];
 
+        $movie->update($attributes);
+
+        return response()->json($movie);
     }
 
     public function destroy($id)

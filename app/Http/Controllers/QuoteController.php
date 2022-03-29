@@ -11,7 +11,7 @@ class QuoteController extends Controller
 {
     public function index()
     {
-        $quotes = Quote::orderBy('id', 'DESC')->with('movie')->paginate(5);
+        $quotes = Quote::orderBy('id', 'DESC')->with('movie')->get();
         return response()->json($quotes);
     }
 
@@ -19,12 +19,10 @@ class QuoteController extends Controller
     {
         $movies = Movie::all();
         return response()->json($movies);
-
     }
 
     public function store(Request $request)
     {
-
         $request->validate([
             'quote-en'  => 'required',
             'quote-ka'  => 'required',
@@ -55,15 +53,18 @@ class QuoteController extends Controller
             'thumbnail' => 'required|image',
             'movie-id' => ['required', Rule::exists('movies', 'id')],
         ]);
-        $updateQuote = Quote::findOrFail($id);
-        $updateQuote->movie_id  = $request->input('movie-id');
-        $updateQuote->quote     = [
-            'en' => $request->input('quote-en'),
-            'ka' => $request->input('quote-ka')
+        $quote = Quote::findOrFail($id);
+        $attributes = [
+            'movie_id' => $request->input('movie-id'),
+            'quote'    => [
+                'en' => $request->input('quote-en'),
+                'ka' => $request->input('quote-ka'),
+            ],
+            'thumbnail' => $request->file('thumbnail')->store('thumbnails')
         ];
-        $updateQuote->thumbnail = $request->file('thumbnail')->store('thumbnails');
-        $updateQuote->save();
-        return response()->json($updateQuote);
+        $quote->update($attributes);
+
+        return response()->json($quote);
     }
 
     public function destroy($id)
