@@ -7,22 +7,19 @@ use App\Models\Movie;
 use App\Models\Quote;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
     public function login(StoreAdminRequest $request)
     {
-        $request->validated();
-        $email =  $request->get('email');
-        $password = $request->get('password');
-
-        $user = User::where('email', $email)->first();
-        if (!Hash::check($password, $user->password)) {
-            return response()->json(["message"=>"error"]);
+        $attributes = $request->validated();
+        $user = auth()->attempt($attributes);
+        $findUser = User::where('email', $request->email)->firstOrFail();
+        if ($user) {
+            $token =$findUser->createToken('token');
+            return response()->json(['user'=>$user, 'token' => $token->plainTextToken]);
         } else {
-            $token =$user->createToken('token');
-            return ['token' => $token->plainTextToken];
+            return response()->json(['user'=>$user, 'status'=>'401']);
         }
     }
 
