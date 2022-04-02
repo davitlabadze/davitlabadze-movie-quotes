@@ -1,0 +1,199 @@
+openapi: 3.0.0
+info:
+  title: Movies Quotes API
+  description: Movies Quotes
+  version: 0.1.9
+
+servers:
+  - url: http://localhost:8000/api
+    description: local server
+  - url: http://producation.app/api
+    description: production server
+components:
+      securitySchemes:
+        bearerAuth:
+          type: http
+          scheme: bearer
+          bearerFormat: JWT
+      security:
+        - bearerAuth: []
+paths:
+  /login:
+      post:
+        summary: Returns a list of users.
+        parameters:
+          - in: query
+            name: email
+            required: true
+            schema:
+              email:
+                type: string
+                description: email
+          - in: query
+            name: password
+            required: true
+            schema:
+              password:
+                type: string
+                description: password
+        description: Optional extended description in CommonMark or HTML.
+        responses:
+          '200':
+            description: A JSON array of user names
+            content:
+              application/json:
+                schema:
+                    user:
+                      type: string
+                    token:
+                      type: string
+  /get-quote:
+    get:
+      summary: Returns a list of users.
+      responses:
+        "200":
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /get-quotes/{movieId}:
+    get:
+      summary: Returns a user by ID.
+      parameters:
+        - name: movieId
+          in: path
+          required: true
+          description: Parameter description in CommonMark or HTML.
+          schema:
+            type : integer
+            format: int64
+            minimum: 1
+      responses:
+        '200':
+          description: OK
+  /Dashboard:
+      get:
+        summary: Returns a list of recent movies quotes and count movies and quotes.
+        responses:
+          "200":
+            description: A JSON array of user names
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    type: string
+        security:
+        - bearerAuth: []
+  /movies:
+    get:
+      summary: Returns a list of users.
+      responses:
+        "200":
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+      security:
+        - bearerAuth: []
+  /movies/create:
+    post:
+      description: Create movie
+      parameters:
+        - in: query
+          name: movie-en
+          required: true
+          schema:
+            movie-en:
+              type: string
+              description: movie name english
+        - in: query
+          name: movie-ka
+          required: true
+          schema:
+            movie-ka:
+              type: string
+              description: movie name georiga
+      summary: create movie.
+      responses:
+        "200":
+          description: A JSON array of add movie
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+      security:
+        - bearerAuth: []
+  /movies/{movieId}/edit:
+    get:
+      description: Update movie
+      parameters:
+        - name: movieId
+        - in: query
+          name: movie-en
+          required: true
+          schema:
+            movie-en:
+              type: string
+              description: movie name english
+        - in: query
+          name: movie-ka
+          required: true
+          schema:
+            movie-ka:
+              type: string
+              description: movie name georiga
+      summary: Update movie.
+      responses:
+        "200":
+          description: A JSON array of edit movie
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+      security:
+        - bearerAuth: []
+  /movies/{movieId}/update:
+    put:
+      description: Update movie
+      parameters:
+        - name: movieId
+        - in: query
+          name: movie-en
+          required: true
+          schema:
+            movie-en:
+              type: string
+              description: movie name english
+        - in: query
+          name: movie-ka
+          required: true
+          schema:
+            movie-ka:
+              type: string
+              description: movie name georiga
+      summary: Update movie.
+      responses:
+        "200":
+          description: A JSON array of edit movie
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+      security:
+        - bearerAuth: []
+
+
+
