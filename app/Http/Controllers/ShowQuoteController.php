@@ -9,6 +9,6 @@ class ShowQuoteController extends Controller
     public function index()
     {
         $data = Quote::inRandomOrder()->with('movie')->first();
-        return response()->json($data);
+        return response()->json(['singleQuote'=>$data]);
     }
 }
