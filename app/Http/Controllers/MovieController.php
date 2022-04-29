@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMovieRequest;
 use App\Models\Movie;
-use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
@@ -13,18 +13,10 @@ class MovieController extends Controller
         return response()->json($movies);
     }
 
-    public function store(Request $request)
+    public function store(StoreMovieRequest $attributes)
     {
-        $request->validate([
-            'movie-en'  => 'required',
-            'movie-ka'  => 'required',
-          ]);
+        $newMovie = Movie::create($attributes->validated());
 
-        $newMovie = new Movie;
-        $newMovie->movie = ['en' => $request->input('movie-en')];
-        $newMovie->movie = ['ka' => $request->input('movie-ka')];
-
-        $newMovie->save();
         return response()->json($newMovie);
     }
 
@@ -34,23 +26,10 @@ class MovieController extends Controller
         return response()->json($movieToEdit);
     }
 
-    public function update(Request $request, $id)
+    public function update(StoreMovieRequest $attributes, Movie $movie)
     {
-        $request->validate([
-            'movie-en'  => 'required',
-            'movie-ka'  => 'required',
-          ]);
-
-        $movie = Movie::findOrFail($id);
-        $attributes = [
-                'movie' => [
-                    'en' => $request->input('movie-en'),
-                    'ka' => $request->input('movie-ka'),
-                ],
-            ];
-
+        $attributes = $attributes->validated();
         $movie->update($attributes);
-
         return response()->json($movie);
     }
 
