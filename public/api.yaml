@@ -17,9 +17,35 @@ components:
           bearerFormat: JWT
       security:
         - bearerAuth: []
+tags: [
+  {
+    name: "Authorization",
+      description: "Operations about user",
+      externalDocs: {
+      description: "Find out more",
+      }
+  },
+  {
+    name: "Guest",
+      description: "Visible information for the guest",
+      externalDocs: {
+      description: "Find out more",
+      }
+  },
+  {
+    name: "Admin",
+      description: "Visible information for the admin",
+      externalDocs: {
+      description: "Find out more",
+      }
+  },
+]
 paths:
   /login:
       post:
+        tags: [
+          "Authorization"
+        ]
         summary: Returns a list of users.
         parameters:
           - in: query
@@ -49,6 +75,9 @@ paths:
                       type: string
   /get-quote:
     get:
+      tags: [
+        "Guest"
+      ]
       summary: Returns a list of users.
       responses:
         "200":
@@ -61,6 +90,9 @@ paths:
                   type: string
   /get-quotes/{movieId}:
     get:
+      tags: [
+        "Guest"
+      ]
       summary: Returns a user by ID.
       parameters:
         - name: movieId
@@ -74,36 +106,100 @@ paths:
       responses:
         '200':
           description: OK
-  /Dashboard:
-      get:
-        summary: Returns a list of recent movies quotes and count movies and quotes.
-        responses:
-          "200":
-            description: A JSON array of user names
-            content:
-              application/json:
-                schema:
-                  type: array
-                  items:
-                    type: string
-        security:
-        - bearerAuth: []
-  /movies:
+  /dashboard:
     get:
-      summary: Returns a list of users.
+      tags: [
+        "Admin"
+      ]
+      security:
+          - bearerAuth: []
+      description: Auto generated using Swagger Inspector
       responses:
-        "200":
-          description: A JSON array of user names
+        '200':
+          description: Auto generated using Swagger Inspector
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: string
+                type: object
+                properties:
+                  quotesCount:
+                    type: integer
+                  moviesCount:
+                    type: integer
+                  quotes:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        thumbnail:
+                          type: string
+                        quote:
+                          type: object
+                          properties:
+                            ka:
+                              type: string
+                            en:
+                              type: string
+                        updated_at:
+                          type: string
+                        movie:
+                          type: object
+                          properties:
+                            movie:
+                              type: object
+                              properties:
+                                ka:
+                                  type: string
+                                en:
+                                  type: string
+                            updated_at:
+                              type: string
+                            created_at:
+                              type: string
+                            id:
+                              type: integer
+                        created_at:
+                          type: string
+                        id:
+                          type: integer
+                        movie_id:
+                          type: integer
+  /movies:
+    get:
       security:
         - bearerAuth: []
+      tags: [
+        "Admin"
+      ]
+      description: movies
+      responses:
+        '200':
+          description: movies
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  movie:
+                    type: object
+                    properties:
+                      en:
+                        type: string
+                      ka:
+                        type: string
+                  create_et:
+                    type: string
+                  updated_at:
+                    type: string
   /movies/create:
     post:
+      tags: [
+        "Admin"
+      ]
+      security:
+        - bearerAuth: []
       description: Create movie
       parameters:
         - in: query
@@ -127,47 +223,77 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: string
-      security:
-        - bearerAuth: []
+                properties:
+                  movie:
+                    type: object
+                    properties:
+                      en:
+                        type: string
+                      ka:
+                        type: string
+                  create_et:
+                    type: string
+                  updated_at:
+                    type: string
+                  id:
+                    type: integer
   /movies/{movieId}/edit:
     get:
-      description: Update movie
+      tags: [
+        "Admin"
+      ]
+      security:
+        - bearerAuth: []
+      description: Edit movies
       parameters:
         - name: movieId
-        - in: query
-          name: movie-en
+          in: path
           required: true
+          description: Parameter description in CommonMark or HTML.
           schema:
-            movie-en:
-              type: string
-              description: movie name english
-        - in: query
-          name: movie-ka
-          required: true
-          schema:
-            movie-ka:
-              type: string
-              description: movie name georiga
-      summary: Update movie.
+            type : integer
+            format: int64
+            minimum: 1
       responses:
-        "200":
-          description: A JSON array of edit movie
+        '200':
+          description: Auto generated using Swagger Inspector
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: string
-      security:
-        - bearerAuth: []
+                type: object
+                properties:
+                  movie:
+                    type: object
+                    properties:
+                      ka:
+                        type: string
+                      en:
+                        type: string
+                  updated_at:
+                    type: string
+                  created_at:
+                    type: string
+                  id:
+                    type: integer
+              examples:
+                '0':
+                  value: >-
+                    {"id":6,"movie":{"en":"test","ka":"\u10e2\u10d4\u10e1\u10e2"},"created_at":"2022-04-28T08:01:33.000000Z","updated_at":"2022-04-28T08:01:33.000000Z"}
   /movies/{movieId}/update:
     put:
+      tags: [
+        "Admin"
+      ]
       description: Update movie
       parameters:
         - name: movieId
+          in: path
+          required: true
+          description: Parameter description in CommonMark or HTML.
+          schema:
+            type : integer
+            format: int64
+            minimum: 1
         - in: query
           name: movie-en
           required: true
@@ -192,8 +318,275 @@ paths:
                 type: array
                 items:
                   type: string
+              examples:
+                '0':
+                  value: >-
+                    {"id":6,"movie":{"en":"test1","ka":"\u10e2\u10d4\u10e1\u10e21"},"created_at":"2022-04-28T08:01:33.000000Z","updated_at":"2022-04-28T08:01:33.000000Z"}
       security:
         - bearerAuth: []
-
-
-
+  /movies/{movieId}:
+    delete:
+      tags: [
+        "Admin"
+      ]
+      summary: Delete a movies
+      parameters:
+        - name: movieId
+          in: path
+          required: true
+          description: Deletes a movie
+          schema:
+            type : integer
+            format: int64
+            minimum: 1
+      description: Delete a movie
+      responses: {
+        200: {
+          description: Delete successfully!
+        },
+        400: {
+          description: "Invalid ID supplied"
+        },
+        404: {
+          description: "Pet not found"
+        }
+      }
+      security:
+        - bearerAuth: []
+  /quotes:
+    get:
+      security:
+        - bearerAuth: []
+      tags: [
+        "Admin"
+      ]
+      description: Auto generated using Swagger Inspector
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                '0':
+                  value: >-
+                    [{"id":5,"movie_id":4,"quote":{"en":"What should tell your
+                    mother?!","ka":"\u10e0\u10d0
+                    \u10d5\u10e3\u10d7\u10ee\u10e0\u10d0
+                    \u10d3\u10d4\u10d3\u10d0\u10e8\u10d4\u10dc\u10e1?!"},"thumbnail":"thumbnails\/jhQhvtHsPL6cDePilrEpc4eo98rrt822wA1axv4L.jpg","created_at":"2022-04-27T16:10:48.000000Z","updated_at":"2022-04-27T16:10:48.000000Z","movie":{"id":4,"movie":{"en":"Father
+                    of a
+                    Soldier","ka":"\u10ef\u10d0\u10e0\u10d8\u10e1\u10d9\u10d0\u10ea\u10d8\u10e1
+                    \u10db\u10d0\u10db\u10d0"},"created_at":"2022-04-27T16:10:21.000000Z","updated_at":"2022-04-27T16:10:21.000000Z"}}]
+  /quotes/create:
+    post:
+      tags: [
+        "Admin"
+      ]
+      security:
+        - bearerAuth: []
+      description: Create movie
+      summary: create quote.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                quote-en:
+                  required: true
+                  type: string
+                quote-ka:
+                  required: true
+                  type: string
+                movie-id:
+                  required: true
+                  type: integer
+                  format: int64
+                thumbnail:
+                  required: true
+                  type: string
+                  format: binary
+              required:
+                - quote-en
+                - quote-ka
+                - movie-id
+                - thumbnail
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                '0':
+                  value: >-
+                    {
+                      "movie_id": "4",
+                      "quote": {
+                        "en": "test",
+                        "ka": "test"
+                      },
+                      "thumbnail": "thumbnails/CXfV3osEgA6w0cAP75Df0cpMCwbEbu8FrDXVbVbs.jpg",
+                      "updated_at": "2022-04-28T19:43:55.000000Z",
+                      "created_at": "2022-04-28T19:43:55.000000Z",
+                      "id": 8
+                    }
+  /quotes/{quoteId}/edit:
+    get:
+      tags: [
+        "Admin"
+      ]
+      summary: Returns Quote data.
+      parameters:
+        - name: quoteId
+          in: path
+          required: true
+          description: Parameter description in CommonMark or HTML.
+          schema:
+            type : integer
+            format: int64
+            minimum: 1
+      description: Auto generated using Swagger Inspector
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  movies:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        movie:
+                          type: object
+                          properties:
+                            ka:
+                              type: string
+                            en:
+                              type: string
+                        updated_at:
+                          type: string
+                        created_at:
+                          type: string
+                        id:
+                          type: integer
+                  quote:
+                    type: object
+                    properties:
+                      thumbnail:
+                        type: string
+                      quote:
+                        type: object
+                        properties:
+                          ka:
+                            type: string
+                          en:
+                            type: string
+                      updated_at:
+                        type: string
+                      created_at:
+                        type: string
+                      id:
+                        type: integer
+                      movie_id:
+                        type: integer
+              examples:
+                '0':
+                  value: >-
+                    {"movies":[{"id":4,"movie":{"en":"Father of a
+                    Soldier","ka":"\u10ef\u10d0\u10e0\u10d8\u10e1\u10d9\u10d0\u10ea\u10d8\u10e1
+                    \u10db\u10d0\u10db\u10d0"},"created_at":"2022-04-27T16:10:21.000000Z","updated_at":"2022-04-27T16:10:21.000000Z"},{"id":5,"movie":{"en":"test","ka":"\u10e2\u10d4\u10e1\u10e2"},"created_at":"2022-04-28T07:59:39.000000Z","updated_at":"2022-04-28T07:59:39.000000Z"}],"quote":{"id":5,"movie_id":4,"quote":{"en":"What
+                    should tell your mother?!","ka":"\u10e0\u10d0
+                    \u10d5\u10e3\u10d7\u10ee\u10e0\u10d0
+                    \u10d3\u10d4\u10d3\u10d0\u10e8\u10d4\u10dc\u10e1?!"},"thumbnail":"thumbnails\/jhQhvtHsPL6cDePilrEpc4eo98rrt822wA1axv4L.jpg","created_at":"2022-04-27T16:10:48.000000Z","updated_at":"2022-04-27T16:10:48.000000Z"}}
+      security:
+        - bearerAuth: []
+  /quotes/10/update:
+    put:
+      tags: [
+        "Admin"
+      ]
+      security:
+        - bearerAuth: []
+      description: Create movie
+      summary: create quote.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                type: object
+                properties:
+                  quote-en:
+                    required: true
+                    type: string
+                  quote-ka:
+                    required: true
+                    type: string
+                  thumbnail: {}
+                  movie-id:
+                    required: true
+                    type: integer
+                    format: int64
+              # required:
+              #   - quote-en
+              #   - quote-ka
+              #   - movie-id
+              #   - thumbnail
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                '0':
+                  value: >-
+                    {
+                      "movie_id": "4",
+                      "quote": {
+                        "en": "test",
+                        "ka": "test"
+                      },
+                      "thumbnail": "thumbnails/CXfV3osEgA6w0cAP75Df0cpMCwbEbu8FrDXVbVbs.jpg",
+                      "updated_at": "2022-04-28T19:43:55.000000Z",
+                      "created_at": "2022-04-28T19:43:55.000000Z",
+                      "id": 8
+                    }
+  /quotes/{quoteId}:
+    delete:
+      tags: [
+        "Admin"
+      ]
+      summary: Delete a quote
+      parameters:
+        - name: quoteId
+          in: path
+          required: true
+          description: Delete a quote
+          schema:
+            type : integer
+            format: int64
+            minimum: 1
+      description: Delete a movie
+      responses: {
+        200: {
+          description: Delete successfully!
+        },
+        400: {
+          description: "Invalid ID supplied"
+        },
+        404: {
+          description: "Pet not found"
+        }
+      }
+      security:
+        - bearerAuth: []
