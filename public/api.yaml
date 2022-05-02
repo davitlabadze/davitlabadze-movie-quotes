@@ -73,6 +73,45 @@ paths:
                       type: string
                     token:
                       type: string
+
+  /logout:
+    post:
+      tags: [
+        "Authorization"
+      ]
+      description: Auto generated using Swagger Inspector
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                email:
+                  type: string
+            examples:
+              '0':
+                value: |-
+                  {
+                      "email":"admin@admin.ge",
+                      "password":"admin"
+                  }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  status:
+                    type: integer
+              examples:
+                '0':
+                  value: '{"status":200,"message":"Logged In Successfully"}'
   /get-quote:
     get:
       tags: [
@@ -329,6 +368,8 @@ paths:
       tags: [
         "Admin"
       ]
+      security:
+        - bearerAuth: []
       summary: Delete a movies
       parameters:
         - name: movieId
@@ -347,12 +388,8 @@ paths:
         400: {
           description: "Invalid ID supplied"
         },
-        404: {
-          description: "Pet not found"
-        }
       }
-      security:
-        - bearerAuth: []
+
   /quotes:
     get:
       security:
@@ -508,38 +545,49 @@ paths:
                     \u10d3\u10d4\u10d3\u10d0\u10e8\u10d4\u10dc\u10e1?!"},"thumbnail":"thumbnails\/jhQhvtHsPL6cDePilrEpc4eo98rrt822wA1axv4L.jpg","created_at":"2022-04-27T16:10:48.000000Z","updated_at":"2022-04-27T16:10:48.000000Z"}}
       security:
         - bearerAuth: []
-  /quotes/10/update:
+  /quotes/{quoteId}/update:
     put:
       tags: [
         "Admin"
       ]
       security:
         - bearerAuth: []
-      description: Create movie
-      summary: create quote.
+      description: Quote Update
+      summary: Update quote.
+      parameters:
+        - name: quoteId
+          in: path
+          required: true
+          description: Parameter description in CommonMark or HTML.
+          schema:
+            type : integer
+            format: int64
+            minimum: 1
       requestBody:
-        required: true
         content:
           application/json:
             schema:
-                type: object
-                properties:
-                  quote-en:
-                    required: true
-                    type: string
-                  quote-ka:
-                    required: true
-                    type: string
-                  thumbnail: {}
-                  movie-id:
-                    required: true
-                    type: integer
-                    format: int64
-              # required:
-              #   - quote-en
-              #   - quote-ka
-              #   - movie-id
-              #   - thumbnail
+              type: object
+              properties:
+                quote:
+                  type: object
+                  properties:
+                    ka:
+                      type: string
+                    en:
+                      type: string
+                movie_id:
+                  type: integer
+            examples:
+              '0':
+                value: |-
+                  {
+                    "movie_id": 64,
+                    "quote": {
+                      "en": "test",
+                      "ka": "test"
+                    }
+                  }
       responses:
         '200':
           description: Auto generated using Swagger Inspector
@@ -547,36 +595,49 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  thumbnail:
+                    type: string
+                  quote:
+                    type: object
+                    properties:
+                      ka:
+                        type: string
+                      en:
+                        type: string
+                  updated_at:
+                    type: string
+                  created_at:
+                    type: string
+                  id:
+                    type: integer
+                  movie_id:
+                    type: integer
               examples:
                 '0':
                   value: >-
-                    {
-                      "movie_id": "4",
-                      "quote": {
-                        "en": "test",
-                        "ka": "test"
-                      },
-                      "thumbnail": "thumbnails/CXfV3osEgA6w0cAP75Df0cpMCwbEbu8FrDXVbVbs.jpg",
-                      "updated_at": "2022-04-28T19:43:55.000000Z",
-                      "created_at": "2022-04-28T19:43:55.000000Z",
-                      "id": 8
-                    }
+                    {"id": 27,"movie_id": 64,"quote": {"en": "Father of a
+                    Soldier","ka":"\u10ef\u10d0\u10e0\u10d8\u10e1\u10d9\u10d0\u10ea\u10d8\u10e1
+                    \u10db\u10d0\u10db\u10d0" },"thumbnail": "thumbnails/ke8Kg7HAqwVzTNyzcLptX849HU1kshEkFdqXnxOK.jpg","created_at": "2022-05-02T19:26:09.000000Z","updated_at": "2022-05-02T21:13:14.000000Z"}
+
   /quotes/{quoteId}:
     delete:
       tags: [
         "Admin"
       ]
-      summary: Delete a quote
+      security:
+        - bearerAuth: []
+      summary: Delete a Quote
       parameters:
         - name: quoteId
           in: path
           required: true
-          description: Delete a quote
+          description: Deletes a Quote
           schema:
             type : integer
             format: int64
             minimum: 1
-      description: Delete a movie
+      description: Delete a Quote
       responses: {
         200: {
           description: Delete successfully!
@@ -584,9 +645,5 @@ paths:
         400: {
           description: "Invalid ID supplied"
         },
-        404: {
-          description: "Pet not found"
-        }
       }
-      security:
-        - bearerAuth: []
+
