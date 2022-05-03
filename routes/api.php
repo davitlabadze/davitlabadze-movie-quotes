@@ -21,7 +21,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::delete('/movies/{movie:id}', [MovieController::class,'destroy']);
     Route::get('/quotes', [QuoteController::class,'index']);
     Route::get('/quotes/create', [QuoteController::class,'create']);
-    Route::post('/quotes/create', [QuoteController::class,'store']);
+    Route::post('/quotes/store', [QuoteController::class,'store']);
     Route::get('/quotes/{quote:id}/edit', [QuoteController::class,'edit']);
     Route::put('/quotes/{quote:id}/update', [QuoteController::class,'update']);
     Route::delete('/quotes/{quote:id}', [QuoteController::class,'destroy']);
