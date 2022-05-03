@@ -46,7 +46,7 @@ paths:
         tags: [
           "Authorization"
         ]
-        summary: Returns a list of users.
+        summary: Returns a personal access token.
         parameters:
           - in: query
             name: email
@@ -62,24 +62,27 @@ paths:
               password:
                 type: string
                 description: password
-        description: Optional extended description in CommonMark or HTML.
         responses:
           '200':
-            description: A JSON array of user names
+            description: Auto generated using Swagger Inspector
             content:
               application/json:
                 schema:
+                  type: object
+                  properties:
                     user:
-                      type: string
+                      type: boolean
                     token:
                       type: string
-
+                examples:
+                  '0':
+                    value: >-
+                      {"user":true,"token":"10|Ckjm0fYQ4IT1QEVcqCbtjqjJPKQr8JcxsW30Qarq"}
   /logout:
     post:
       tags: [
         "Authorization"
       ]
-      description: Auto generated using Swagger Inspector
       requestBody:
         content:
           application/json:
@@ -99,7 +102,6 @@ paths:
                   }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
           content:
             application/json:
               schema:
@@ -117,34 +119,115 @@ paths:
       tags: [
         "Guest"
       ]
-      summary: Returns a list of users.
+      summary: Returns the quote to the guest.
       responses:
-        "200":
-          description: A JSON array of user names
+        '200':
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: string
+                type: object
+                properties:
+                  singleQuote:
+                    type: object
+                    properties:
+                      thumbnail:
+                        type: string
+                      quote:
+                        type: object
+                        properties:
+                          ka:
+                            type: string
+                          en:
+                            type: string
+                      updated_at:
+                        type: string
+                      movie:
+                        type: object
+                        properties:
+                          movie:
+                            type: object
+                            properties:
+                              ka:
+                                type: string
+                              en:
+                                type: string
+                          updated_at:
+                            type: string
+                          created_at:
+                            type: string
+                          id:
+                            type: integer
+                      created_at:
+                        type: string
+                      id:
+                        type: integer
+                      movie_id:
+                        type: integer
+              examples:
+                '0':
+                  value: >-
+                    {"singleQuote":{"id":30,"movie_id":64,"quote":{"en":"tes","ka":"test"},"thumbnail":"thumbnails\/JXQLlFrCUOr7DpsZfNS5ewLiLNpXQt5o3IrGezDi.jpg","created_at":"2022-05-03T07:28:58.000000Z","updated_at":"2022-05-03T07:28:58.000000Z","movie":{"id":64,"movie":{"en":"\u10e2\u10d4\u10e1\u10e2","ka":"\u10e2\u10d4\u10e1\u10e2"},"created_at":"2022-05-02T19:25:56.000000Z","updated_at":"2022-05-02T19:25:56.000000Z"}}}
+
   /get-quotes/{movieId}:
     get:
       tags: [
         "Guest"
       ]
-      summary: Returns a user by ID.
+      summary: Returns quotes according to the movie ID.
       parameters:
         - name: movieId
           in: path
           required: true
-          description: Parameter description in CommonMark or HTML.
           schema:
             type : integer
             format: int64
             minimum: 1
       responses:
         '200':
-          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  movie:
+                    type: object
+                    properties:
+                      ka:
+                        type: string
+                      en:
+                        type: string
+                  updated_at:
+                    type: string
+                  created_at:
+                    type: string
+                  id:
+                    type: integer
+                  quotes:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        thumbnail:
+                          type: string
+                        quote:
+                          type: object
+                          properties:
+                            ka:
+                              type: string
+                            en:
+                              type: string
+                        updated_at:
+                          type: string
+                        created_at:
+                          type: string
+                        id:
+                          type: integer
+                        movie_id:
+                          type: integer
+              examples:
+                '0':
+                  value: >-
+                    {"id":64,"movie":{"en":"\u10e2\u10d4\u10e1\u10e2","ka":"\u10e2\u10d4\u10e1\u10e2"},"created_at":"2022-05-02T19:25:56.000000Z","updated_at":"2022-05-02T19:25:56.000000Z","quotes":[{"id":30,"movie_id":64,"quote":{"en":"tes","ka":"test"},"thumbnail":"thumbnails\/JXQLlFrCUOr7DpsZfNS5ewLiLNpXQt5o3IrGezDi.jpg","created_at":"2022-05-03T07:28:58.000000Z","updated_at":"2022-05-03T07:28:58.000000Z"},{"id":32,"movie_id":64,"quote":{"en":"dato","ka":"dato"},"thumbnail":"thumbnails\/nK7FrTirmlEcy8NSegsUGugN7VpFBG1Q5XOZatdr.jpg","created_at":"2022-05-03T07:30:49.000000Z","updated_at":"2022-05-03T07:30:49.000000Z"},{"id":33,"movie_id":64,"quote":{"en":"test","ka":"sdasd"},"thumbnail":"thumbnails\/BSdDMUyjiJs438TrMG4FlOA4ORAbV5MO3PgdDHTm.jpg","created_at":"2022-05-03T07:31:00.000000Z","updated_at":"2022-05-03T07:31:00.000000Z"}]}
   /dashboard:
     get:
       tags: [
@@ -152,10 +235,10 @@ paths:
       ]
       security:
           - bearerAuth: []
-      description: Auto generated using Swagger Inspector
+      summary: Return the counted data.
+      description: Return quote count, movie count and recent add data.
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
           content:
             application/json:
               schema:
@@ -210,10 +293,11 @@ paths:
       tags: [
         "Admin"
       ]
-      description: movies
+      summary: Return Movies.
+      description: Return movie.
       responses:
         '200':
-          description: movies
+          description: Return movie.
           content:
             application/json:
               schema:
@@ -239,7 +323,7 @@ paths:
       ]
       security:
         - bearerAuth: []
-      description: Create movie
+      description: Create movie.
       parameters:
         - in: query
           name: movie-en
@@ -247,18 +331,18 @@ paths:
           schema:
             movie-en:
               type: string
-              description: movie name english
+              description: movie name english.
         - in: query
           name: movie-ka
           required: true
           schema:
             movie-ka:
               type: string
-              description: movie name georiga
+              description: movie name georiga.
       summary: create movie.
       responses:
         "200":
-          description: A JSON array of add movie
+          description: A JSON array of add movie.
           content:
             application/json:
               schema:
@@ -283,19 +367,17 @@ paths:
       ]
       security:
         - bearerAuth: []
-      description: Edit movies
+      description: Edit movies.
       parameters:
         - name: movieId
           in: path
           required: true
-          description: Parameter description in CommonMark or HTML.
           schema:
             type : integer
             format: int64
             minimum: 1
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
           content:
             application/json:
               schema:
@@ -323,12 +405,11 @@ paths:
       tags: [
         "Admin"
       ]
-      description: Update movie
+      description: Update movie.
       parameters:
         - name: movieId
           in: path
           required: true
-          description: Parameter description in CommonMark or HTML.
           schema:
             type : integer
             format: int64
@@ -339,18 +420,18 @@ paths:
           schema:
             movie-en:
               type: string
-              description: movie name english
+              description: movie name english.
         - in: query
           name: movie-ka
           required: true
           schema:
             movie-ka:
               type: string
-              description: movie name georiga
+              description: movie name georiga.
       summary: Update movie.
       responses:
         "200":
-          description: A JSON array of edit movie
+          description: A JSON array of edit movie.
           content:
             application/json:
               schema:
@@ -370,17 +451,17 @@ paths:
       ]
       security:
         - bearerAuth: []
-      summary: Delete a movies
+      summary: Delete a movies.
       parameters:
         - name: movieId
           in: path
           required: true
-          description: Deletes a movie
+          description: Delete a movie.
           schema:
             type : integer
             format: int64
             minimum: 1
-      description: Delete a movie
+      description: Delete a movie.
       responses: {
         200: {
           description: Delete successfully!
@@ -397,10 +478,11 @@ paths:
       tags: [
         "Admin"
       ]
-      description: Auto generated using Swagger Inspector
+      summary: Return Quotes.
+      description: Return Quotes.
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Return Quotes.
           content:
             application/json:
               schema:
@@ -417,14 +499,35 @@ paths:
                     Soldier","ka":"\u10ef\u10d0\u10e0\u10d8\u10e1\u10d9\u10d0\u10ea\u10d8\u10e1
                     \u10db\u10d0\u10db\u10d0"},"created_at":"2022-04-27T16:10:21.000000Z","updated_at":"2022-04-27T16:10:21.000000Z"}}]
   /quotes/create:
+    get:
+      tags: [
+        "Admin"
+      ]
+      security:
+        - bearerAuth: []
+      summary: Return movies.
+      description: Returns movies in quotation fields Need a movie ID that shows the movie name and gives you a choice.
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                '0':
+                  value: >-
+                    [{"id":64,"movie":{"en":"\u10e2\u10d4\u10e1\u10e2","ka":"\u10e2\u10d4\u10e1\u10e2"}}]
+      servers:
+  /quotes/store:
     post:
       tags: [
         "Admin"
       ]
       security:
         - bearerAuth: []
-      description: Create movie
-      summary: create quote.
+      description: Create quote.
+      summary: Create quote.
       requestBody:
         required: true
         content:
@@ -453,7 +556,6 @@ paths:
                 - thumbnail
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
           content:
             application/json:
               schema:
@@ -477,20 +579,17 @@ paths:
       tags: [
         "Admin"
       ]
-      summary: Returns Quote data.
+      summary: Returns Quote of ID data.
       parameters:
         - name: quoteId
           in: path
           required: true
-          description: Parameter description in CommonMark or HTML.
           schema:
             type : integer
             format: int64
             minimum: 1
-      description: Auto generated using Swagger Inspector
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
           content:
             application/json:
               schema:
@@ -552,13 +651,12 @@ paths:
       ]
       security:
         - bearerAuth: []
-      description: Quote Update
+      description: Quote Update.
       summary: Update quote.
       parameters:
         - name: quoteId
           in: path
           required: true
-          description: Parameter description in CommonMark or HTML.
           schema:
             type : integer
             format: int64
@@ -590,7 +688,6 @@ paths:
                   }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
           content:
             application/json:
               schema:
@@ -627,17 +724,17 @@ paths:
       ]
       security:
         - bearerAuth: []
-      summary: Delete a Quote
+      summary: Delete a Quote.
       parameters:
         - name: quoteId
           in: path
           required: true
-          description: Deletes a Quote
+          description: Delete a Quote.
           schema:
             type : integer
             format: int64
             minimum: 1
-      description: Delete a Quote
+      description: Delete a Quote.
       responses: {
         200: {
           description: Delete successfully!
