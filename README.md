@@ -18,7 +18,8 @@
 
 ## Package
 * [Spatie Package](https://github.com/spatie/laravel-translatable)
-* [Swagger]('https://swagger.io/')
+* [Swagger](https://swagger.io/)
+  
   
 you can see api routes
 
