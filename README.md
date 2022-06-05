@@ -26,6 +26,10 @@ you can see api routes
 ```bash 
 http://localhost:8000/swagger
 ```
+!['swagger'](appscreen/swagger.png)
+
+
+
 
 <a name="iar"></a>
 
