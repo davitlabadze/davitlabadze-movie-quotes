@@ -26,7 +26,7 @@ you can see api routes
 ```bash 
 http://localhost:8000/swagger
 ```
-!['swagger'](appscreen/swagger.png)
+!['swagger'](readme/swagger.png)
 
 
 
@@ -38,7 +38,7 @@ http://localhost:8000/swagger
 1. Downoad [ZIP](https://github.com/RedberryInternship/davitlabadze-movie-quotes/archive/refs/heads/main.zip) or 
 Clone: 
  ```bash 
- https://github.com/davitlabadze/davitlabadze-movie-quotes
+ git clone https://github.com/davitlabadze/davitlabadze-movie-quotes
 ```
 Install all dependencies using the command
 ```bash 
@@ -82,7 +82,7 @@ php artisan add:admin
 <a name="db"></a>
 
 ## Database structure
-!['db'](appscreen/db.png)
+!['db'](readme/db.png)
 
 <a name="resources"></a>
 
