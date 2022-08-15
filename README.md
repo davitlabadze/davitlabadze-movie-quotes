@@ -37,35 +37,39 @@ http://localhost:8000/swagger
 
 1. Downoad [ZIP](https://github.com/RedberryInternship/davitlabadze-movie-quotes/archive/refs/heads/main.zip) or 
 Clone: 
- ```bash 
+ ``` 
  git clone https://github.com/davitlabadze/davitlabadze-movie-quotes
 ```
 Install all dependencies using the command
-```bash 
+``` 
 composer install
 ```
 Create env file Run the command 
-```bash 
+```
 cp .env.example .env
 ```
-Run  the command 
-```bash
+Set the application key 
+```
 php artisan key:generate
 ```    
 Create a place to store images 
-```bash
+```
 php artisan storage:link
 ```
 Create database run the command 
-```bash 
+``` 
 touch database/database.sqlite 
 ```
-Run the command  
-```bash 
+Run the database migrations 
+``` 
 php artisan migrate
 ```
-Run the command  
-```bash 
+Seed the database with records
+```
+php artisan db:seed
+```
+Serve the application on the PHP development server
+``` 
 php artisan serve
 ```
 
@@ -73,8 +77,8 @@ php artisan serve
 
 ## Administrator
 
-Run command and enter data. 
-```bash 
+This artisan command is used to add admin data without registering. 
+``` 
 php artisan add:admin
 ``` 
 
