@@ -18,37 +18,37 @@ class DatabaseSeeder extends Seeder
         Movie::truncate();
         Quote::truncate();
         Movie::create([
-            'movie'=> [
+            'movie' => [
                 'en' => 'The Godfather',
                 'ka' => 'ნათლია'
-            ]
+            ],
         ]);
 
         Quote::create([
             'movie_id' => '1',
-            'quote'=>[
+            'quote' => [
                 'en' => "I'm gonna make him an offer he can't refuse.",
                 'ka' => "მე მას შეთავაზებას გავუკეთებ, რომელზეც უარს ვერ იტყვის"
             ],
-            'thumbnail' => 'thumbnails/thegodfather.jpg'
+            'thumbnail' => 'image/tet.jpg'
         ]);
 
         Quote::create([
             'movie_id' => '1',
-            'quote'=>[
+            'quote' => [
                 'en' => "I Know It Was You, Fredo. You Broke My Heart. You Broke My Heart!",
                 'ka' => "ვიცი, რომ შენ იყავი, ფრედო. გული გამიტეხე. გული გამიტეხე!"
             ],
-            'thumbnail' => 'thumbnails/the-godfather-part-II.webp'
+            'thumbnail' => 'image/tet.jpg'
         ]);
 
         Quote::create([
             'movie_id' => '1',
-            'quote'=>[
+            'quote' => [
                 'en' => "Time erodes gratitude more quickly than it does beauty!",
                 'ka' => "დრო უფრო სწრაფად ანადგურებს მადლიერებას, ვიდრე სილამაზეს!"
             ],
-            'thumbnail' => 'thumbnails/godfatherofficial.jpg'
+            'thumbnail' => 'image/tet.jpg'
         ]);
     }
 }

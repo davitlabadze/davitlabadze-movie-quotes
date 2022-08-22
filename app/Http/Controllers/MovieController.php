@@ -13,9 +13,16 @@ class MovieController extends Controller
         return response()->json($movies);
     }
 
-    public function store(StoreMovieRequest $attributes)
+    public function store(StoreMovieRequest $request)
     {
-        $newMovie = Movie::create($attributes->validated());
+        $attributes = [
+            'movie' => [
+                'en' => $request->input('movie_en'),
+                'ka' => $request->input('movie_ka'),
+            ],
+        ];
+
+        $newMovie = Movie::create($attributes);
 
         return response()->json($newMovie);
     }
@@ -26,9 +33,15 @@ class MovieController extends Controller
         return response()->json($movieToEdit);
     }
 
-    public function update(StoreMovieRequest $attributes, Movie $movie)
+    public function update(StoreMovieRequest $request, Movie $movie)
     {
-        $attributes = $attributes->validated();
+        $attributes = [
+            'movie' => [
+                'en' => $request->input('movie_en'),
+                'ka' => $request->input('movie_ka'),
+            ],
+        ];
+
         $movie->update($attributes);
         return response()->json($movie);
     }
