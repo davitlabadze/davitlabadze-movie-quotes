@@ -64,7 +64,7 @@ paths:
                 description: password
         responses:
           '200':
-            description: Auto generated using Swagger Inspector
+            description: http://localhost:8000/api/login
             content:
               application/json:
                 schema:
@@ -78,6 +78,14 @@ paths:
                   '0':
                     value: >-
                       {"user":true,"token":"10|Ckjm0fYQ4IT1QEVcqCbtjqjJPKQr8JcxsW30Qarq"}
+            links:
+              User:
+                operationId: Get User
+                parameters:
+                  email: string
+                  password: string
+                description: >
+                  `/login`
   /logout:
     post:
       tags: [
@@ -114,6 +122,11 @@ paths:
               examples:
                 '0':
                   value: '{"status":200,"message":"Logged In Successfully"}'
+          links:
+            logout:
+              operationId: Log Out
+              description: >
+                `/logout`
   /get-quote:
     get:
       tags: [
@@ -167,7 +180,11 @@ paths:
                 '0':
                   value: >-
                     {"singleQuote":{"id":30,"movie_id":64,"quote":{"en":"tes","ka":"test"},"thumbnail":"thumbnails\/JXQLlFrCUOr7DpsZfNS5ewLiLNpXQt5o3IrGezDi.jpg","created_at":"2022-05-03T07:28:58.000000Z","updated_at":"2022-05-03T07:28:58.000000Z","movie":{"id":64,"movie":{"en":"\u10e2\u10d4\u10e1\u10e2","ka":"\u10e2\u10d4\u10e1\u10e2"},"created_at":"2022-05-02T19:25:56.000000Z","updated_at":"2022-05-02T19:25:56.000000Z"}}}
-
+          links:
+            Get Quote:
+              operationId: Get Quote
+              description: >
+                `/get-quotes`
   /get-quotes/{movieId}:
     get:
       tags: [
@@ -228,6 +245,13 @@ paths:
                 '0':
                   value: >-
                     {"id":64,"movie":{"en":"\u10e2\u10d4\u10e1\u10e2","ka":"\u10e2\u10d4\u10e1\u10e2"},"created_at":"2022-05-02T19:25:56.000000Z","updated_at":"2022-05-02T19:25:56.000000Z","quotes":[{"id":30,"movie_id":64,"quote":{"en":"tes","ka":"test"},"thumbnail":"thumbnails\/JXQLlFrCUOr7DpsZfNS5ewLiLNpXQt5o3IrGezDi.jpg","created_at":"2022-05-03T07:28:58.000000Z","updated_at":"2022-05-03T07:28:58.000000Z"},{"id":32,"movie_id":64,"quote":{"en":"dato","ka":"dato"},"thumbnail":"thumbnails\/nK7FrTirmlEcy8NSegsUGugN7VpFBG1Q5XOZatdr.jpg","created_at":"2022-05-03T07:30:49.000000Z","updated_at":"2022-05-03T07:30:49.000000Z"},{"id":33,"movie_id":64,"quote":{"en":"test","ka":"sdasd"},"thumbnail":"thumbnails\/BSdDMUyjiJs438TrMG4FlOA4ORAbV5MO3PgdDHTm.jpg","created_at":"2022-05-03T07:31:00.000000Z","updated_at":"2022-05-03T07:31:00.000000Z"}]}
+          links:
+              Get Quotes:
+                operationId: Get movie quotes
+                parameters:
+                  movieId: int
+                description: >
+                  `/get-quotes/{movieId}`
   /dashboard:
     get:
       tags: [
@@ -286,6 +310,11 @@ paths:
                           type: integer
                         movie_id:
                           type: integer
+          links:
+            Dashboard:
+              operationId: Get Data for Dashboard
+              description: >
+                `/dashboard`
   /movies:
     get:
       security:
@@ -316,6 +345,11 @@ paths:
                     type: string
                   updated_at:
                     type: string
+          links:
+            Movies:
+              operationId: Get Movies
+              description: >
+                `/movies`
   /movies/create:
     post:
       tags: [
@@ -360,6 +394,14 @@ paths:
                     type: string
                   id:
                     type: integer
+          links:
+            Create Movie:
+              operationId: Create Movie
+              parameters:
+                movie_en: string
+                movie_ka: string
+              description: >
+                `/movies/create`
   /movies/{movieId}/edit:
     get:
       tags: [
@@ -400,6 +442,13 @@ paths:
                 '0':
                   value: >-
                     {"id":6,"movie":{"en":"test","ka":"\u10e2\u10d4\u10e1\u10e2"},"created_at":"2022-04-28T08:01:33.000000Z","updated_at":"2022-04-28T08:01:33.000000Z"}
+          links:
+            Get Movie for edit:
+              operationId: Get Movie for edit
+              parameters:
+                movieId: int
+              description: >
+                `/movies/{movieId}/edit`
   /movies/{movieId}/update:
     put:
       tags: [
@@ -415,17 +464,17 @@ paths:
             format: int64
             minimum: 1
         - in: query
-          name: movie-en
+          name: movie_en
           required: true
           schema:
-            movie-en:
+            movie_en:
               type: string
               description: movie name english.
         - in: query
-          name: movie-ka
+          name: movie_ka
           required: true
           schema:
-            movie-ka:
+            movie_ka:
               type: string
               description: movie name georiga.
       summary: Update movie.
@@ -442,6 +491,15 @@ paths:
                 '0':
                   value: >-
                     {"id":6,"movie":{"en":"test1","ka":"\u10e2\u10d4\u10e1\u10e21"},"created_at":"2022-04-28T08:01:33.000000Z","updated_at":"2022-04-28T08:01:33.000000Z"}
+          links:
+            Update Movie:
+              operationId: Update Movie
+              parameters:
+                movieId: int
+                movie_en: string
+                movie_ka: string
+              description: >
+                `/movies/{movieId}/update`
       security:
         - bearerAuth: []
   /movies/{movieId}:
@@ -461,7 +519,7 @@ paths:
             type : integer
             format: int64
             minimum: 1
-      description: Delete a movie.
+      description: Delete a movie. `/movies/{movieId}`
       responses: {
         200: {
           description: Delete successfully!
@@ -470,6 +528,7 @@ paths:
           description: "Invalid ID supplied"
         },
       }
+
 
   /quotes:
     get:
@@ -498,6 +557,11 @@ paths:
                     of a
                     Soldier","ka":"\u10ef\u10d0\u10e0\u10d8\u10e1\u10d9\u10d0\u10ea\u10d8\u10e1
                     \u10db\u10d0\u10db\u10d0"},"created_at":"2022-04-27T16:10:21.000000Z","updated_at":"2022-04-27T16:10:21.000000Z"}}]
+          links:
+            Get Quotes:
+              operationId: Get Quotes
+              description: >
+                `/quotes`
   /quotes/create:
     get:
       tags: [
@@ -518,6 +582,11 @@ paths:
                 '0':
                   value: >-
                     [{"id":64,"movie":{"en":"\u10e2\u10d4\u10e1\u10e2","ka":"\u10e2\u10d4\u10e1\u10e2"}}]
+          links:
+            Get Movie:
+              operationId: Get Movie
+              description: >
+                `/quotes/create`
       servers:
   /quotes/store:
     post:
@@ -574,6 +643,16 @@ paths:
                       "created_at": "2022-04-28T19:43:55.000000Z",
                       "id": 8
                     }
+          links:
+            Create Quote:
+              operationId: Create Quote
+              parameters:
+                quote_en: string
+                quote_ka: string
+                movieId: int
+                thumbnail: string(binary)
+              description: >
+                `/quotes/store`
   /quotes/{quoteId}/edit:
     get:
       tags: [
@@ -642,6 +721,13 @@ paths:
                     should tell your mother?!","ka":"\u10e0\u10d0
                     \u10d5\u10e3\u10d7\u10ee\u10e0\u10d0
                     \u10d3\u10d4\u10d3\u10d0\u10e8\u10d4\u10dc\u10e1?!"},"thumbnail":"thumbnails\/jhQhvtHsPL6cDePilrEpc4eo98rrt822wA1axv4L.jpg","created_at":"2022-04-27T16:10:48.000000Z","updated_at":"2022-04-27T16:10:48.000000Z"}}
+          links:
+            Get quote for edit:
+              operationId: Get Quote
+              parameters:
+                quoteId: int
+              description: >
+                `/quotes/{quoteId}/edit`
       security:
         - bearerAuth: []
   /quotes/{quoteId}/update:
@@ -716,7 +802,13 @@ paths:
                     {"id": 27,"movie_id": 64,"quote": {"en": "Father of a
                     Soldier","ka":"\u10ef\u10d0\u10e0\u10d8\u10e1\u10d9\u10d0\u10ea\u10d8\u10e1
                     \u10db\u10d0\u10db\u10d0" },"thumbnail": "thumbnails/ke8Kg7HAqwVzTNyzcLptX849HU1kshEkFdqXnxOK.jpg","created_at": "2022-05-02T19:26:09.000000Z","updated_at": "2022-05-02T21:13:14.000000Z"}
-
+          links:
+            Update Quote:
+              operationId: Update Quote
+              parameters:
+                quoteId: int
+              description: >
+                `/quotes/{quoteId}/update`
   /quotes/{quoteId}:
     delete:
       tags: [
@@ -734,7 +826,7 @@ paths:
             type : integer
             format: int64
             minimum: 1
-      description: Delete a Quote.
+      description: Delete a Quote. `/quotes/{quoteId}`
       responses: {
         200: {
           description: Delete successfully!
