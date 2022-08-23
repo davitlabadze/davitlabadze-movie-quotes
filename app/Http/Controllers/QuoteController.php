@@ -6,6 +6,7 @@ use App\Http\Requests\StoreQuoteRequest;
 use App\Models\Movie;
 use App\Models\Quote;
 
+
 class QuoteController extends Controller
 {
     public function index()
@@ -20,9 +21,17 @@ class QuoteController extends Controller
         return response()->json($movies);
     }
 
-    public function store(StoreQuoteRequest $attributes)
+    public function store(StoreQuoteRequest $request)
     {
-        $newQuote = Quote::create(array_merge($attributes->validated(), [
+        $attributes = [
+            'quote' => [
+                'en' => $request->input('quote_en'),
+                'ka' => $request->input('quote_ka'),
+            ],
+            'movie_id'  => $request->input('movie_id'),
+        ];
+
+        $newQuote = Quote::create(array_merge($attributes, [
             'thumbnail' => request()->file('thumbnail')->store('thumbnails')
         ]));
 
@@ -33,7 +42,7 @@ class QuoteController extends Controller
     {
         $movies = Movie::all();
         $quote = Quote::findOrfail($id);
-        return response()->json(['movies'=>$movies,'quote'=>$quote]);
+        return response()->json(['movies' => $movies, 'quote' => $quote]);
     }
 
     public function update(StoreQuoteRequest $attributes, Quote $quote)

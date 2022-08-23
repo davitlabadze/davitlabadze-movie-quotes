@@ -326,17 +326,17 @@ paths:
       description: Create movie.
       parameters:
         - in: query
-          name: movie-en
+          name: movie_en
           required: true
           schema:
-            movie-en:
+            movie_en:
               type: string
               description: movie name english.
         - in: query
-          name: movie-ka
+          name: movie_ka
           required: true
           schema:
-            movie-ka:
+            movie_ka:
               type: string
               description: movie name georiga.
       summary: create movie.
@@ -535,13 +535,13 @@ paths:
             schema:
               type: object
               properties:
-                quote-en:
+                quote_en:
                   required: true
                   type: string
-                quote-ka:
+                quote_ka:
                   required: true
                   type: string
-                movie-id:
+                movie_id:
                   required: true
                   type: integer
                   format: int64
@@ -550,9 +550,9 @@ paths:
                   type: string
                   format: binary
               required:
-                - quote-en
-                - quote-ka
-                - movie-id
+                - quote_en
+                - quote_ka
+                - movie_id
                 - thumbnail
       responses:
         '200':

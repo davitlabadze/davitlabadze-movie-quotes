@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
                 'en' => "I'm gonna make him an offer he can't refuse.",
                 'ka' => "მე მას შეთავაზებას გავუკეთებ, რომელზეც უარს ვერ იტყვის"
             ],
-            'thumbnail' => 'image/tet.jpg'
+            'thumbnail' => 'thumbnails/test.jpg'
         ]);
 
         Quote::create([
@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
                 'en' => "I Know It Was You, Fredo. You Broke My Heart. You Broke My Heart!",
                 'ka' => "ვიცი, რომ შენ იყავი, ფრედო. გული გამიტეხე. გული გამიტეხე!"
             ],
-            'thumbnail' => 'image/tet.jpg'
+            'thumbnail' => 'thumbnails/test.jpg'
         ]);
 
         Quote::create([
@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
                 'en' => "Time erodes gratitude more quickly than it does beauty!",
                 'ka' => "დრო უფრო სწრაფად ანადგურებს მადლიერებას, ვიდრე სილამაზეს!"
             ],
-            'thumbnail' => 'image/tet.jpg'
+            'thumbnail' => 'thumbnails/test.jpg'
         ]);
     }
 }
