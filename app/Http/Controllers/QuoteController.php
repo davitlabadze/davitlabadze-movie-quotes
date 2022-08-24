@@ -45,9 +45,15 @@ class QuoteController extends Controller
         return response()->json(['movies' => $movies, 'quote' => $quote]);
     }
 
-    public function update(StoreQuoteRequest $attributes, Quote $quote)
+    public function update(StoreQuoteRequest $request, Quote $quote)
     {
-        $attributes = $attributes->validated();
+        $attributes = [
+            'quote' => [
+                'en' => $request->input('quote_en'),
+                'ka' => $request->input('quote_ka'),
+            ],
+            'movie_id'  => $request->input('movie_id'),
+        ];
 
         if ($attributes['thumbnail'] ?? false) {
             $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
