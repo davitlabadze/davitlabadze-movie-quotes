@@ -1,11 +1,22 @@
 
 ## Table of Contents
 
+* [ Tech Stack](#tech-stack)
+* [ Frontend](#frontend)
 * [ Prerequisites ](#pre)
 * [ Install and Run](#iar)
 * [ Package ](#package)
 * [ Administrator ](#administrator)
 * [ Resources](#resources)
+
+## Frontend
+* [React](https://github.com/RedberryInternship/davitlabadze-movie-quotes-front#about-the-application)   
+* [Vue](https://github.com/davitlabadze/movie-quotes-vue)
+   
+
+
+## Tech Stack
+* [Laravel v8.54](https://laravel.com/docs/8.x)
 
 <a name="pre"></a>
 
@@ -64,10 +75,6 @@ Run the database migrations
 ``` 
 php artisan migrate
 ```
-Seed the database with records
-```
-php artisan db:seed
-```
 Serve the application on the PHP development server
 ``` 
 php artisan serve
@@ -92,8 +99,5 @@ php artisan add:admin
 
 ##  Resources
 * [DrawSQL](https://drawsql.app/)  
-* [Frontend](https://github.com/RedberryInternship/davitlabadze-movie-quotes-front#about-the-application)   
-   
-
 
 
